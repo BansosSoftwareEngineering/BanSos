@@ -13,11 +13,8 @@ REPORT_MEDIA_BUCKET = "report-media"
 
 app = FastAPI(
     title="BANSOS Flood Risk API",
-    description="FastAPI backend for BanSos flood risk and incident report system.",
-    version="1.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc",
-    openapi_url="/openapi.json",
+    description="API for location-based flood risk decision-support system.",
+    version="0.2.0",
 )
 
 app.add_middleware(
@@ -26,7 +23,6 @@ app.add_middleware(
         "http://localhost:5173",
         "http://localhost:5174",
         "http://localhost:3000",
-        "https://ban-sos.vercel.app",
     ],
     allow_credentials=False,
     allow_methods=["*"],
