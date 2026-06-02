@@ -1,4 +1,5 @@
-const API_BASE = '/api';
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL || 'https://randyy18-bansos-backend.hf.space';
 
 interface CacheEntry<T> {
   data: T;
