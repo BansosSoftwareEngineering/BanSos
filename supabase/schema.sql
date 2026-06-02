@@ -53,25 +53,6 @@ create table if not exists broadcast_alerts (
   created_at timestamptz default now()
 );
 
-create table if not exists risk_snapshots (
-  id uuid primary key default gen_random_uuid(),
-  latitude double precision not null,
-  longitude double precision not null,
-  kelurahan text,
-  kecamatan text,
-  kota_administrasi text,
-  final_score numeric,
-  probability_percent numeric,
-  risk_level text,
-  trend text,
-  weather_score numeric,
-  water_score numeric,
-  baseline_score numeric,
-  historical_score numeric,
-  data_freshness_warning text,
-  created_at timestamptz default now()
-);
-
 create table if not exists saved_locations (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null,
