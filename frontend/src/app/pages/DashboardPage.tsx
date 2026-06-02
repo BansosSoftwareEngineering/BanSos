@@ -717,7 +717,7 @@ export function DashboardPage() {
         </div>
       )}
 
-      {waterFreshnessWarning && !loading && !error && (
+      {false && waterFreshnessWarning && !loading && !error && (
         <div className="flex items-start gap-3 p-4 rounded-xl bg-[rgba(92,60,0,0.25)] border border-[rgba(255,183,134,0.25)]">
           <AlertTriangle size={18} className="text-[#ffb786] mt-0.5 shrink-0" />
 
