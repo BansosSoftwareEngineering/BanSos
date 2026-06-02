@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import type { FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { AlertCircle } from 'lucide-react';
 import imgDisasterReliefScene from '../../assets/images/disaster-relief-scene.png';
@@ -17,29 +18,51 @@ export function ResetPasswordPage() {
   const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+    let mounted = true;
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (!mounted) return;
+
       if (event === 'PASSWORD_RECOVERY') {
         setPageState('form');
       }
     });
 
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+
+      if (!mounted) return;
+
+      if (data.session) {
+        setPageState('form');
+      }
+    };
+
+    checkSession();
+
     const timer = setTimeout(() => {
       setPageState((prev) => (prev === 'loading' ? 'invalid' : prev));
-    }, 3000);
+    }, 6000);
 
     return () => {
+      mounted = false;
       subscription.unsubscribe();
       clearTimeout(timer);
     };
   }, []);
 
   const clearError = (field: keyof typeof errors) => {
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSubmitError('');
+
     const newErrors: typeof errors = {};
 
     if (!password) {
@@ -55,10 +78,15 @@ export function ResetPasswordPage() {
     }
 
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length > 0) return;
 
     setIsLoading(true);
-    const { error } = await supabase.auth.updateUser({ password });
+
+    const { error } = await supabase.auth.updateUser({
+      password,
+    });
+
     setIsLoading(false);
 
     if (error) {
@@ -72,7 +100,9 @@ export function ResetPasswordPage() {
   return (
     <div
       className="relative min-h-screen"
-      style={{ background: 'linear-gradient(90deg, rgb(17, 24, 39) 0%, rgb(17, 24, 39) 100%)' }}
+      style={{
+        background: 'linear-gradient(90deg, rgb(17, 24, 39) 0%, rgb(17, 24, 39) 100%)',
+      }}
     >
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0">
@@ -116,6 +146,7 @@ export function ResetPasswordPage() {
                   BANSOS
                 </span>
               </div>
+
               <h2 className="text-white text-xl font-semibold text-center drop-shadow-sm">
                 {pageState === 'success' ? 'Password Berhasil Diubah' : 'Buat Password Baru'}
               </h2>
@@ -135,12 +166,14 @@ export function ResetPasswordPage() {
                 <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center">
                   <AlertCircle size={32} className="text-red-300" />
                 </div>
+
                 <div>
                   <p className="text-white font-semibold mb-1">Link Tidak Valid</p>
                   <p className="text-white/70 text-sm leading-relaxed">
                     Link reset password sudah kadaluarsa atau tidak valid. Silakan minta link baru.
                   </p>
                 </div>
+
                 <div className="pt-2 w-full">
                   <button
                     onClick={() => navigate('/')}
@@ -158,10 +191,14 @@ export function ResetPasswordPage() {
                 {/* Password */}
                 <div className="space-y-1.5">
                   <label className="text-white text-sm font-medium block">Password Baru</label>
+
                   <input
                     type="password"
                     value={password}
-                    onChange={(e) => { setPassword(e.target.value); clearError('password'); }}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      clearError('password');
+                    }}
                     placeholder="Minimal 8 karakter"
                     className={`w-full bg-white rounded-lg px-4 py-3.5 text-gray-800 placeholder-gray-400 text-sm border shadow-sm focus:outline-none focus:ring-2 transition-all ${
                       errors.password
@@ -169,12 +206,14 @@ export function ResetPasswordPage() {
                         : 'border-gray-300 focus:ring-blue-400'
                     }`}
                   />
+
                   {errors.password && (
                     <p className="flex items-center gap-1.5 text-red-300 text-xs">
                       <AlertCircle size={12} className="shrink-0" />
                       {errors.password}
                     </p>
                   )}
+
                   {/* Password strength */}
                   {password && !errors.password && (
                     <div className="flex gap-1 mt-1">
@@ -190,6 +229,7 @@ export function ResetPasswordPage() {
                           }`}
                         />
                       ))}
+
                       <span className="text-[10px] text-gray-300 ml-1 self-center">
                         {password.length < 8 ? 'Lemah' : password.length < 12 ? 'Cukup' : 'Kuat'}
                       </span>
@@ -199,30 +239,50 @@ export function ResetPasswordPage() {
 
                 {/* Confirm Password */}
                 <div className="space-y-1.5">
-                  <label className="text-white text-sm font-medium block">Konfirmasi Password</label>
+                  <label className="text-white text-sm font-medium block">
+                    Konfirmasi Password
+                  </label>
+
                   <input
                     type="password"
                     value={confirmPassword}
-                    onChange={(e) => { setConfirmPassword(e.target.value); clearError('confirmPassword'); }}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      clearError('confirmPassword');
+                    }}
                     placeholder="Ulangi password baru"
                     className={`w-full bg-white rounded-lg px-4 py-3.5 text-gray-800 placeholder-gray-400 text-sm border shadow-sm focus:outline-none focus:ring-2 transition-all ${
                       errors.confirmPassword
                         ? 'border-2 border-red-400 focus:ring-red-300'
                         : confirmPassword && confirmPassword === password
-                        ? 'border-2 border-green-400 focus:ring-green-300'
-                        : 'border-gray-300 focus:ring-blue-400'
+                          ? 'border-2 border-green-400 focus:ring-green-300'
+                          : 'border-gray-300 focus:ring-blue-400'
                     }`}
                   />
+
                   {errors.confirmPassword && (
                     <p className="flex items-center gap-1.5 text-red-300 text-xs">
                       <AlertCircle size={12} className="shrink-0" />
                       {errors.confirmPassword}
                     </p>
                   )}
+
                   {!errors.confirmPassword && confirmPassword && confirmPassword === password && (
                     <p className="flex items-center gap-1.5 text-green-300 text-xs">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="shrink-0">
-                        <path d="M2 6l2.5 3L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        className="shrink-0"
+                      >
+                        <path
+                          d="M2 6l2.5 3L10 3"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                       Password cocok
                     </p>
@@ -264,14 +324,22 @@ export function ResetPasswordPage() {
               <div className="flex flex-col items-center text-center gap-4 py-4">
                 <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 13l4 4L19 7" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M5 13l4 4L19 7"
+                      stroke="#4ade80"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
+
                 <div>
                   <p className="text-white/80 text-sm leading-relaxed">
                     Password Anda telah berhasil diperbarui. Silakan masuk dengan password baru.
                   </p>
                 </div>
+
                 <div className="pt-2 w-full">
                   <button
                     onClick={() => navigate('/')}
