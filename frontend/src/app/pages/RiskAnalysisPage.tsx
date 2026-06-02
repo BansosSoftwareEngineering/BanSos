@@ -637,7 +637,7 @@ export function RiskAnalysisPage() {
       )}
 
       {/* Data freshness warning */}
-      {waterFreshnessWarning && !loading && !locationLoading && (
+      {false && waterFreshnessWarning && !loading && !locationLoading && (
         <div className="flex items-start gap-3 p-4 rounded-xl bg-[rgba(92,60,0,0.25)] border border-[rgba(255,183,134,0.25)]">
           <BarChart2 size={16} className="text-[#ffb786] mt-0.5 shrink-0" />
           <div>
