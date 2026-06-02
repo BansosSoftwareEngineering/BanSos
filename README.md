@@ -43,35 +43,35 @@ Link: https://ban-sos.vercel.app/
 
 ### Frontend
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- React Router
-- Supabase Client
-- Leaflet dan React Leaflet
-- Lucide React
-- Radix UI components
-- Recharts
+- React — library utama untuk membangun tampilan website.
+- Vite — build tool dan development server.
+- TypeScript — membantu membuat code lebih aman dan mudah dikelola.
+- Tailwind CSS — digunakan untuk styling tampilan website.
+- React Router — mengatur routing antar halaman.
+- Leaflet dan React Leaflet — menampilkan peta yang interaktif.
+- Supabase Client — menghubungkan frontend dengan Supabase.
+- Lucide React — icon.
+- Radix UI — komponen UI tambahan.
+- Recharts — chart dan visualisasi data.
 
 ### Backend
 
-- FastAPI
-- Python
-- Uvicorn
-- Pandas
-- GeoPandas
-- Shapely
-- Requests
-- Supabase Python Client
+- FastAPI — framework utama untuk membuat backend API.
+- Python — bahasa utama yang digunakan di backend khususnya di FastAPI.
+- Uvicorn — server untuk menjalankan backend FastAPI.
+- Pandas — pengolahan data.
+- GeoPandas — pengolahan data geospasial.
+- Shapely — operasi geometri dan koordinat.
+- Requests — mengambil data dari API eksternal.
+- Supabase Python Client — menghubungkan backend dengan Supabase.
 
 ### Database & Services
 
-- Supabase Authentication
-- Supabase Database
-- Supabase Storage
-- Supabase Row Level Security
-- Open-Meteo API untuk data prakiraan hujan
+- Supabase Authentication — login, register, verifikasi email, dan reset password.
+- Supabase Database — menyimpan data aplikasi seperti reports, saved locations, dan broadcast alerts.
+- Supabase Storage — menyimpan media laporan seperti foto atau video.
+- Supabase Row Level Security — mengatur akses data agar lebih aman.
+- Open-Meteo API — mengambil data prakiraan hujan/cuaca.
 
 ### Deployment
 
