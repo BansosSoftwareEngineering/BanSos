@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Lock, Mail, Eye, EyeOff, Shield, ArrowLeft } from 'lucide-react';
+import { supabase } from '../services/supabaseClient';
 
 export function AdminLoginPage() {
   const navigate = useNavigate();
@@ -10,20 +11,42 @@ export function AdminLoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    // Simulate auth — accept admin@bansос.id / admin123
-    setTimeout(() => {
-      if (email === 'admin@bansos.id' && password === 'admin123') {
-        sessionStorage.setItem('admin_auth', '1');
-        navigate('/admin/portal');
-      } else {
-        setError('Email atau password tidak valid.');
-        setLoading(false);
+
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError || !data.user) {
+        setError('Email atau password admin tidak valid.');
+        return;
       }
-    }, 900);
+
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single();
+
+      if (profileError || profile?.role !== 'admin') {
+        await supabase.auth.signOut();
+        sessionStorage.removeItem('admin_auth');
+        setError('Akun ini tidak memiliki akses admin.');
+        return;
+      }
+
+      sessionStorage.setItem('admin_auth', '1');
+      navigate('/admin/portal');
+    } catch {
+      setError('Terjadi kesalahan saat login admin.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
