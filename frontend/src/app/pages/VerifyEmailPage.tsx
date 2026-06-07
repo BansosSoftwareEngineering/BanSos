@@ -47,14 +47,12 @@ export function VerifyEmailPage() {
           boxShadow: '0px 25px 50px -12px rgba(0,0,0,0.4)',
         }}
       >
-        {/* Icon */}
         <div className="flex justify-center mb-5">
           <div className="w-16 h-16 rounded-full bg-blue-500/20 border border-blue-400/30 flex items-center justify-center">
             <Mail className="text-blue-400" size={32} />
           </div>
         </div>
 
-        {/* Title */}
         <h1 className="text-white text-2xl font-bold mb-2">Verifikasi Email Anda</h1>
         <p className="text-gray-300 text-sm leading-relaxed mb-1">
           Kami telah mengirim link verifikasi ke:
@@ -66,7 +64,6 @@ export function VerifyEmailPage() {
           Buka email tersebut dan klik tombol <strong className="text-white">Verifikasi Email</strong> untuk mengaktifkan akun Anda.
         </p>
 
-        {/* Resend status */}
         {resendStatus === 'success' && (
           <div className="flex items-center gap-2 bg-green-500/20 border border-green-400/30 rounded-lg px-4 py-3 text-green-300 text-sm mb-4">
             <CheckCircle2 size={16} className="shrink-0" />
@@ -80,7 +77,6 @@ export function VerifyEmailPage() {
           </div>
         )}
 
-        {/* Resend button */}
         {email && (
           <button
             onClick={handleResend}
@@ -92,7 +88,6 @@ export function VerifyEmailPage() {
           </button>
         )}
 
-        {/* Back to login */}
         <button
           onClick={() => navigate('/')}
           className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-gray-400 hover:text-white text-sm transition-colors"
@@ -101,7 +96,6 @@ export function VerifyEmailPage() {
           Kembali ke halaman login
         </button>
 
-        {/* Help text */}
         <p className="mt-5 text-gray-500 text-xs">
           Tidak menerima email? Cek folder spam atau klik tombol kirim ulang di atas.
         </p>

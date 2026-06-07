@@ -89,22 +89,18 @@ const reset = () =>
 
   return (
     <>
-      {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/60 z-[60]"
         onClick={onClose}
       />
 
-      {/* Sheet: slides up from bottom on mobile, centered modal on desktop */}
       <div className="fixed inset-x-0 bottom-0 z-[61] md:inset-0 md:flex md:items-center md:justify-center md:p-4">
         <div className="bg-[#1d2027] border border-[rgba(255,255,255,0.1)] rounded-t-2xl md:rounded-2xl w-full md:max-w-[480px] max-h-[88vh] flex flex-col shadow-2xl">
 
-          {/* Drag handle – mobile only */}
           <div className="flex justify-center pt-3 pb-1 md:hidden">
             <div className="w-10 h-1 bg-[rgba(255,255,255,0.15)] rounded-full" />
           </div>
 
-          {/* Header */}
           <div className="flex items-center justify-between px-5 py-3 border-b border-[rgba(255,255,255,0.06)]">
             <div className="flex items-center gap-2">
               <SlidersHorizontal size={15} className="text-[#adc6ff]" />
@@ -123,10 +119,8 @@ const reset = () =>
             </button>
           </div>
 
-          {/* Body */}
           <div className="flex-1 overflow-y-auto px-5 py-4 space-y-6">
 
-            {/* Urgensi */}
             <div>
               <p className="text-[#8c909f] text-xs font-semibold uppercase tracking-widest mb-3">
                 Urgensi
@@ -152,7 +146,6 @@ const reset = () =>
               </div>
             </div>
 
-            {/* Lokasi (Radius) */}
             <div>
               <p className="text-[#8c909f] text-xs font-semibold uppercase tracking-widest mb-3">
                 Lokasi (Radius)
@@ -177,7 +170,6 @@ const reset = () =>
               </div>
             </div>
 
-            {/* Waktu */}
             <div>
               <p className="text-[#8c909f] text-xs font-semibold uppercase tracking-widest mb-3">
                 Waktu
@@ -202,7 +194,6 @@ const reset = () =>
               </div>
             </div>
 
-            {/* Status Validasi */}
             <div>
               <p className="text-[#8c909f] text-xs font-semibold uppercase tracking-widest mb-3">
                 Status Validasi
@@ -228,7 +219,6 @@ const reset = () =>
             </div>
           </div>
 
-          {/* Footer */}
           <div className="px-5 py-4 border-t border-[rgba(255,255,255,0.06)] flex gap-3">
             <button
               onClick={reset}

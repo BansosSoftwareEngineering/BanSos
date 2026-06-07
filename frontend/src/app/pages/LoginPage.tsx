@@ -134,7 +134,6 @@ export function LoginPage() {
   return (
     <>
       <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#f6f9ff] px-4 py-6 sm:px-6 lg:px-10">
-        {/* Background */}
         <div className="fixed inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.28),transparent_34%),radial-gradient(circle_at_top_right,rgba(191,219,254,0.55),transparent_32%),linear-gradient(135deg,#f8fbff_0%,#eef5ff_45%,#ffffff_100%)]" />
 
@@ -146,9 +145,7 @@ export function LoginPage() {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] bg-[size:48px_48px] opacity-40" />
         </div>
 
-        {/* Content */}
         <div className="relative z-10 grid w-full max-w-[1120px] grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_460px] lg:gap-14">
-          {/* Left Content */}
           <div className="hidden lg:block">
             <div className="mb-8 flex items-center gap-2">
               <LogoMark size={32} />
@@ -198,10 +195,8 @@ export function LoginPage() {
             </div>
           </div>
 
-          {/* Login Card */}
           <div className="mx-auto w-full max-w-[440px] lg:max-w-none">
             <div className="relative rounded-[26px] border border-white/70 bg-white/65 p-5 shadow-[0_24px_80px_rgba(37,99,235,0.16)] backdrop-blur-2xl sm:rounded-[32px] sm:p-8 lg:p-10">
-              {/* Mobile Header */}
               <div className="mb-6 flex flex-col items-center text-center lg:hidden">
                 <div className="mb-2 flex items-center gap-2">
                   <LogoMark size={26} />
@@ -216,7 +211,6 @@ export function LoginPage() {
                 </p>
               </div>
 
-              {/* Desktop Card Header */}
               <div className="mb-6 hidden lg:block">
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
                   Selamat datang
@@ -349,7 +343,6 @@ export function LoginPage() {
         </div>
       </div>
 
-      {/* Forgot Password Modal */}
       {modal === 'forgotPassword' && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/30 p-4 backdrop-blur-sm">
           <div className="relative w-full max-w-[440px] rounded-[26px] border border-white/70 bg-white/70 p-5 shadow-[0_24px_80px_rgba(37,99,235,0.18)] backdrop-blur-2xl sm:rounded-[32px] sm:p-8">

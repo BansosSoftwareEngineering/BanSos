@@ -66,8 +66,6 @@ create table if not exists saved_locations (
   updated_at timestamptz default now()
 );
 
--- Notification preferences.
--- Flood Risk Alert intentionally is NOT included as switch because it is a critical safety alert.
 create table if not exists notification_preferences (
   user_id uuid primary key,
   approved_report boolean not null default true,
@@ -77,7 +75,6 @@ create table if not exists notification_preferences (
   updated_at timestamptz default now()
 );
 
--- If you previously created flood_risk_alert column, this removes it safely.
 alter table notification_preferences
   drop column if exists flood_risk_alert;
 
@@ -85,7 +82,6 @@ alter table notification_preferences
 alter table saved_locations add column if not exists latitude double precision;
 alter table saved_locations add column if not exists longitude double precision;
 
--- Helpful indexes.
 create index if not exists reports_status_created_idx on reports(status, created_at desc);
 create index if not exists reports_location_idx on reports(latitude, longitude);
 create index if not exists report_media_report_id_idx on report_media(report_id);
@@ -93,13 +89,10 @@ create index if not exists report_verifications_report_id_idx on report_verifica
 create index if not exists saved_locations_user_id_idx on saved_locations(user_id, created_at desc);
 create index if not exists notification_preferences_user_id_idx on notification_preferences(user_id);
 
--- Storage bucket for evidence images/videos.
--- If this fails because the bucket already exists, it is safe to ignore.
 insert into storage.buckets (id, name, public)
 values ('report-media', 'report-media', true)
 on conflict (id) do update set public = true;
 
--- Public read policy for uploaded report evidence.
 do $$
 begin
   if not exists (
@@ -112,11 +105,6 @@ begin
   end if;
 end $$;
 
--- Because uploads are handled by the FastAPI backend using service role key,
--- no public insert policy is required for storage.objects.
-
--- Optional RLS for notification_preferences if accessed directly through Supabase client.
--- If all access goes through FastAPI service role, RLS will not block service-role calls.
 alter table notification_preferences enable row level security;
 
 do $$

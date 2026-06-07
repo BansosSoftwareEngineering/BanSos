@@ -226,8 +226,6 @@ export function MapPage() {
   const [usingUserLocation, setUsingUserLocation] = useState(false);
   const [showUserLocationLabel, setShowUserLocationLabel] = useState(true);
 
-  // Cached primary-location coords so the 60-second interval
-  // doesn't call the Supabase API on every reload.
   const primaryCoordsRef = useRef<{ lat: number; lng: number } | null>(null);
 
   const [showNotifications, setShowNotifications] = useState(false);
@@ -253,7 +251,6 @@ export function MapPage() {
   const clickDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMapClick = useCallback((lat: number, lng: number) => {
-    // Debounce 600 ms — mencegah spam klik memborosi API quota
     if (clickDebounceRef.current) clearTimeout(clickDebounceRef.current);
 
     setClickCoords([lat, lng]);
@@ -287,7 +284,6 @@ export function MapPage() {
         primaryCoordsRef.current = { lat: resolved.lat, lng: resolved.lng };
       }
 
-      // GPS takes priority when available; primary address is the fallback
       let center = primaryCoordsRef.current;
 
       try {
@@ -298,12 +294,10 @@ export function MapPage() {
           lng: location.longitude,
         };
 
-        // Cache the GPS coords so the interval uses them too
         primaryCoordsRef.current = center;
         setUsingUserLocation(true);
       } catch {
         setUsingUserLocation(false);
-        // center stays as primary address — not hardcoded Kemang
       }
 
       setUserCoords(center);
@@ -374,8 +368,6 @@ export function MapPage() {
 
     loadMapData();
 
-    // Refresh setiap 10 menit — cukup untuk data risiko/laporan,
-    // dan tidak memborosi limit 60 req/menit dari external API.
     const interval = window.setInterval(loadMapData, 10 * 60 * 1000);
 
     return () => window.clearInterval(interval);

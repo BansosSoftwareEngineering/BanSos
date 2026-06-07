@@ -32,7 +32,6 @@ const adminItem: NavItem = {
 export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  // ── User profile ─────────────────────────────────────────────────────────
   const [supportOpen,    setSupportOpen]    = useState(false);
   const [avatarUrl,      setAvatarUrl]      = useState('');
   const [userName,       setUserName]       = useState('');
@@ -71,7 +70,6 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
       window.removeEventListener('bansos-location-updated', onLocationUpdated);
     };
   }, []);
-  // ── Helpers ──────────────────────────────────────────────────────────────
   const isActive = (path: string) =>
     path === '/dashboard'
       ? location.pathname === '/dashboard'
@@ -88,7 +86,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
-        {/* ── Mobile header ─────────────────────────────────────── */}
+  
         <div
           className="lg:hidden flex items-center justify-between px-4 py-3 border-b bansos-sidebar__section"
         >
@@ -100,7 +98,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             <X size={18} />
           </button>
         </div>
-        {/* ── User profile ──────────────────────────────────────── */}
+
         <div className="px-4 py-4 border-b bansos-sidebar__section" >
           <div className="flex items-center gap-3">
             <button
@@ -139,7 +137,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             </div>
           </div>
         </div>
-        {/* ── Navigation ────────────────────────────────────────── */}
+
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
             const active = isActive(item.path);
@@ -156,7 +154,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             );
           })}
           <div className="my-2 border-t theme-border" />
-          {/* Admin Portal */}
+
           <button
             onClick={() => handleNav(adminItem.path)}
             className="bansos-sidebar__admin w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-opacity text-left group"
@@ -175,7 +173,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             </span>
           </button>
         </nav>
-        {/* ── Bottom actions ────────────────────────────────────── */}
+
         <div className="px-3 py-4 space-y-1 border-t bansos-sidebar__section">
           {(() => {
             const active = isActive('/dashboard/settings');

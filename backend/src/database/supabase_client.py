@@ -5,7 +5,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 from supabase import Client, create_client
 
-# Resolve .env relative to this file so it works regardless of CWD.
 _ENV_PATH = Path(__file__).resolve().parent.parent.parent / ".env"
 load_dotenv(dotenv_path=_ENV_PATH)
 
