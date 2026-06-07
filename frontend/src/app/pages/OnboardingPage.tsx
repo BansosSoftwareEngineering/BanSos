@@ -11,13 +11,11 @@ interface NominatimResult {
   lon: string;
 }
 
-// ── Step type ─────────────────────────────────────────────────────
 type Step = 'welcome' | 'address' | 'done';
 
 export function OnboardingPage() {
   const navigate = useNavigate();
 
-  // Guard: if already onboarded, go straight to dashboard
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       if (data.user?.user_metadata?.onboarding_complete) {
@@ -30,7 +28,6 @@ export function OnboardingPage() {
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
 
-  // Address form state
   const [address, setAddress]     = useState('');
   const [lat, setLat]             = useState<number | null>(null);
   const [lng, setLng]             = useState<number | null>(null);
@@ -65,7 +62,6 @@ export function OnboardingPage() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // ── Address autocomplete ──────────────────────────────────────
   const handleAddressChange = (value: string) => {
     setAddress(value);
     setLat(null);
@@ -102,7 +98,6 @@ export function OnboardingPage() {
     setShowSuggestions(false);
   };
 
-  // ── Save primary address ──────────────────────────────────────
   const handleSave = async () => {
     if (!address.trim() || !userId) return;
     setSaving(true);
@@ -119,7 +114,6 @@ export function OnboardingPage() {
         radius: 3,
       });
 
-      // Store coords in sessionStorage so DashboardPage picks them up immediately
       if (lat !== null && lng !== null) {
         sessionStorage.setItem(
           'bansos_user_location',
@@ -127,7 +121,6 @@ export function OnboardingPage() {
         );
       }
 
-      // Mark onboarding as complete and store primary location ID
       await supabase.auth.updateUser({
         data: {
           onboarding_complete: true,
@@ -145,13 +138,11 @@ export function OnboardingPage() {
     }
   };
 
-  // ── Skip onboarding ───────────────────────────────────────────
   const handleSkip = async () => {
     await supabase.auth.updateUser({ data: { onboarding_complete: true } });
     navigate('/dashboard', { replace: true });
   };
 
-  // ── Render helpers ────────────────────────────────────────────
   const canSave = address.trim().length > 0 && !saving;
 
   return (
@@ -161,7 +152,6 @@ export function OnboardingPage() {
         background: 'linear-gradient(135deg, #0a0d14 0%, #10131a 50%, #0f1520 100%)',
       }}
     >
-      {/* Decorative blobs */}
       <div
         className="fixed top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-[0.07] pointer-events-none"
         style={{ background: 'radial-gradient(circle, #3b82f6 0%, transparent 70%)' }}
@@ -172,7 +162,6 @@ export function OnboardingPage() {
       />
 
       <div className="relative z-10 w-full max-w-[480px]">
-        {/* ── Step: Welcome ─────────────────────────────────── */}
         {step === 'welcome' && (
           <div
             className="rounded-[28px] p-8 lg:p-10 text-center"
@@ -183,7 +172,6 @@ export function OnboardingPage() {
               boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
             }}
           >
-            {/* Logo */}
             <div className="flex items-center justify-center gap-2 mb-6">
               <svg width="26" height="24" viewBox="0 0 31.5 30" fill="none">
                 <path
@@ -197,7 +185,6 @@ export function OnboardingPage() {
               </span>
             </div>
 
-            {/* Welcome text */}
             <div className="mb-8">
               <div className="w-16 h-16 rounded-full bg-[rgba(96,165,250,0.15)] border border-[rgba(96,165,250,0.25)] flex items-center justify-center mx-auto mb-4">
                 <MapPin size={28} className="text-[#60a5fa]" />
@@ -213,13 +200,11 @@ export function OnboardingPage() {
               </p>
             </div>
 
-            {/* Step indicators */}
             <div className="flex items-center justify-center gap-2 mb-8">
               <div className="w-8 h-1.5 rounded-full bg-[#3b82f6]" />
               <div className="w-8 h-1.5 rounded-full bg-[rgba(255,255,255,0.15)]" />
             </div>
 
-            {/* CTA buttons */}
             <button
               onClick={() => setStep('address')}
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold text-sm transition-colors shadow-lg mb-3"
@@ -236,7 +221,6 @@ export function OnboardingPage() {
           </div>
         )}
 
-        {/* ── Step: Address Form ─────────────────────────────── */}
         {step === 'address' && (
           <div
             className="rounded-[28px] p-8 lg:p-10"
@@ -247,7 +231,6 @@ export function OnboardingPage() {
               boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
             }}
           >
-            {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <button
                 onClick={() => setStep('welcome')}
@@ -259,7 +242,6 @@ export function OnboardingPage() {
                 <div className="w-8 h-1.5 rounded-full bg-[rgba(255,255,255,0.15)]" />
                 <div className="w-8 h-1.5 rounded-full bg-[#3b82f6]" />
               </div>
-              {/* spacer */}
               <div className="w-7" />
             </div>
 
@@ -270,7 +252,6 @@ export function OnboardingPage() {
               </p>
             </div>
 
-            {/* Address input with autocomplete */}
             <div className="space-y-4">
               <div className="relative" ref={suggestionRef}>
                 <label className="block text-[#8c909f] text-xs font-medium mb-1.5 uppercase tracking-wide">
@@ -298,7 +279,6 @@ export function OnboardingPage() {
                   )}
                 </div>
 
-                {/* Coord confirmation */}
                 {lat !== null && lng !== null && (
                   <p className="mt-1.5 text-[11px] text-[#4ade80] flex items-center gap-1">
                     <CheckCircle2 size={11} />
@@ -312,7 +292,6 @@ export function OnboardingPage() {
                   </p>
                 )}
 
-                {/* Autocomplete dropdown */}
                 {showSuggestions && suggestions.length > 0 && (
                   <ul className="absolute z-[3000] left-0 right-0 mt-1.5 bg-[#1a1d26] border border-[rgba(255,255,255,0.12)] rounded-xl overflow-hidden shadow-2xl max-h-52 overflow-y-auto">
                     {suggestions.map((s) => (
@@ -336,7 +315,6 @@ export function OnboardingPage() {
                 )}
               </div>
 
-              {/* Error */}
               {error && (
                 <p className="flex items-center gap-1.5 text-[#ffb4ab] text-xs">
                   <AlertCircle size={12} className="shrink-0" />
@@ -344,7 +322,6 @@ export function OnboardingPage() {
                 </p>
               )}
 
-              {/* Save button */}
               <div className="pt-2">
                 <button
                   onClick={handleSave}
@@ -376,7 +353,6 @@ export function OnboardingPage() {
           </div>
         )}
 
-        {/* ── Step: Done ─────────────────────────────────────── */}
         {step === 'done' && (
           <div
             className="rounded-[28px] p-8 lg:p-10 text-center"

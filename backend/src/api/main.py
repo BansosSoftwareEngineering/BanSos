@@ -30,10 +30,6 @@ app.add_middleware(
 )
 
 
-# ─────────────────────────────────────────────────────────────
-# Pydantic Models
-# ─────────────────────────────────────────────────────────────
-
 class ReportCreate(BaseModel):
     title: str = Field(..., min_length=3)
     description: str = Field(..., min_length=3)
@@ -112,10 +108,6 @@ class RiskSnapshotCreate(BaseModel):
     data_freshness_warning: Optional[str] = None
 
 
-# ─────────────────────────────────────────────────────────────
-# Helpers
-# ─────────────────────────────────────────────────────────────
-
 def _db_error(exc: Exception) -> HTTPException:
     return HTTPException(status_code=500, detail=str(exc))
 
@@ -178,15 +170,10 @@ def _enrich_report_vote_summary(
     report["total_votes"] = total_votes
     report["current_user_vote"] = current_user_vote
 
-    # Jangan expose semua row vote ke frontend list. Summary di atas sudah cukup.
     report.pop("report_votes", None)
 
     return report
 
-
-# ─────────────────────────────────────────────────────────────
-# Core API
-# ─────────────────────────────────────────────────────────────
 
 @app.get("/")
 def root():
@@ -198,10 +185,6 @@ def get_risk(lat: float = Query(...), lng: float = Query(...)):
     result = predict_flood_risk(lat=lat, lng=lng)
     return result
 
-
-# ─────────────────────────────────────────────────────────────
-# Reports: user submits reports, admin verifies reports
-# ─────────────────────────────────────────────────────────────
 
 @app.post("/reports")
 def create_report(report: ReportCreate):
@@ -248,8 +231,6 @@ def get_reports(
         if status:
             query = query.eq("status", status.strip().lower())
 
-        # owner_id filters reports created by the logged-in user.
-        # user_id is kept for enriching current_user_vote in community report lists.
         if owner_id:
             query = query.eq("user_id", owner_id)
 
@@ -303,7 +284,6 @@ def update_report_status(report_id: str, update: ReportStatusUpdate):
     normalized_status = _normalize_status(update.status)
 
     try:
-        # Ambil data laporan dulu supaya bisa tahu user_id dan title laporan.
         current_report = (
             supabase
             .table("reports")
@@ -321,7 +301,6 @@ def update_report_status(report_id: str, update: ReportStatusUpdate):
         }
 
         if normalized_status == "approved":
-            # Admin verification locks the report and makes confidence final.
             report_patch["confidence_score"] = 100
 
         elif normalized_status == "rejected":
@@ -335,7 +314,6 @@ def update_report_status(report_id: str, update: ReportStatusUpdate):
             .execute()
         )
 
-        # Store verification/audit note. This is useful for academic/demo proof.
         if normalized_status in {"approved", "rejected", "duplicate", "need_review"}:
             supabase.table("report_verifications").insert({
                 "report_id": report_id,
@@ -345,12 +323,10 @@ def update_report_status(report_id: str, update: ReportStatusUpdate):
                 "admin_notes": update.admin_notes,
             }).execute()
 
-        # Buat notifikasi untuk user hanya kalau status approved/rejected.
         report_owner_id = report_data.get("user_id")
         report_title = report_data.get("title") or "Laporan kamu"
 
         if report_owner_id and normalized_status in {"approved", "rejected"}:
-            # Cek notification preferences user.
             pref_result = (
                 supabase
                 .table("notification_preferences")
@@ -519,10 +495,6 @@ async def upload_report_media(report_id: str, file: UploadFile = File(...)):
         raise _db_error(exc)
 
 
-# ─────────────────────────────────────────────────────────────
-# Saved Locations
-# ─────────────────────────────────────────────────────────────
-
 @app.get("/saved-locations")
 def get_saved_locations(user_id: str = Query(...)):
     supabase = get_supabase()
@@ -586,10 +558,6 @@ def delete_saved_location(location_id: str):
     except Exception as exc:
         raise _db_error(exc)
 
-
-# ─────────────────────────────────────────────────────────────
-# Notification Preferences
-# ─────────────────────────────────────────────────────────────
 
 @app.get("/notification-preferences")
 def get_notification_preferences(user_id: str = Query(...)):
@@ -680,9 +648,6 @@ def update_notification_preferences(
     except Exception as exc:
         raise _db_error(exc)
 
-# ─────────────────────────────────────────────────────────────
-# User Notifications
-# ─────────────────────────────────────────────────────────────
 
 @app.get("/notifications")
 def get_notifications(
@@ -726,9 +691,6 @@ def mark_notification_as_read(notification_id: str):
     except Exception as exc:
         raise _db_error(exc)
 
-# ─────────────────────────────────────────────────────────────
-# Broadcast alerts
-# ─────────────────────────────────────────────────────────────
 
 @app.post("/broadcasts")
 def create_broadcast(alert: BroadcastCreate):
@@ -758,10 +720,6 @@ def get_broadcasts(limit: int = Query(30, ge=1, le=100)):
     except Exception as exc:
         raise _db_error(exc)
 
-
-# ─────────────────────────────────────────────────────────────
-# Risk snapshots, optional for historical analytics
-# ─────────────────────────────────────────────────────────────
 
 @app.post("/risk-snapshots")
 def create_risk_snapshot(snapshot: RiskSnapshotCreate):

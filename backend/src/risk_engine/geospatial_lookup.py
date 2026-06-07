@@ -3,26 +3,21 @@ from pathlib import Path
 from shapely.geometry import Point
 
 
-# Absolute path agar tidak bergantung pada CWD saat uvicorn dijalankan
 _BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
 GEOJSON_PATH = _BACKEND_DIR / "datasource/raw/jakartasatu_resiko_banjir.geojson"
 
-# Maksimal jarak fallback ke polygon risiko terdekat.
-# 5000 meter cukup aman untuk area Jakarta.
-# Kalau mau lebih luas, bisa ubah ke 10000.
+
 MAX_FALLBACK_DISTANCE_M = 5000
 
 
 def load_flood_risk_polygons():
     gdf = gpd.read_file(GEOJSON_PATH)
 
-    # Pastikan CRS lat/lng
     if gdf.crs is None:
         gdf = gdf.set_crs(epsg=4326)
     else:
         gdf = gdf.to_crs(epsg=4326)
 
-    # Standardize column names
     gdf = gdf.rename(
         columns={
             "WADMKD": "kelurahan",
@@ -84,18 +79,14 @@ def _row_to_result(row, lat, lng, is_fallback=False, distance_m=None):
 def find_risk_polygon_by_latlng(lat, lng):
     gdf = load_flood_risk_polygons()
 
-    user_point = Point(lng, lat)  # Point(longitude, latitude)
+    user_point = Point(lng, lat)
 
-    # covers lebih aman daripada contains.
-    # contains bisa gagal kalau titik berada tepat di boundary polygon.
     matched = gdf[gdf.geometry.covers(user_point)]
 
     if not matched.empty:
         row = matched.iloc[0]
         return _row_to_result(row, lat, lng, is_fallback=False)
 
-    # Kalau tidak masuk polygon mana pun,
-    # cari polygon risiko terdekat sebagai fallback.
     try:
       gdf_meter = gdf.to_crs(epsg=3857)
       point_meter = gpd.GeoSeries([user_point], crs="EPSG:4326").to_crs(epsg=3857).iloc[0]

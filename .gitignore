@@ -1,13 +1,3 @@
-# =============================================================================
-# BanSos — comprehensive .gitignore
-# Frontend: React + Vite + TypeScript
-# Backend:  Python + FastAPI (bansos backend/)
-# Database: Supabase
-# =============================================================================
-
-# -----------------------------------------------------------------------------
-# Secrets & environment files (NEVER commit)
-# -----------------------------------------------------------------------------
 .env
 .env.*
 !.env.example
@@ -19,13 +9,9 @@ secrets/
 credentials.json
 service-account*.json
 
-# Backend-specific env (folder name contains a space)
 bansos backend/.env
 bansos backend/.env.*
 
-# -----------------------------------------------------------------------------
-# Node / frontend dependencies & build output
-# -----------------------------------------------------------------------------
 node_modules/
 jspm_packages/
 web_modules/
@@ -43,15 +29,12 @@ out/
 .docusaurus/
 .serverless/
 
-# Vite
 .vite/
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# TypeScript
 *.tsbuildinfo
 
-# Package manager caches
 .npm
 .pnpm-store
 .pnp.*
@@ -63,18 +46,15 @@ vite.config.ts.timestamp-*
 !.yarn/versions
 .yarn-integrity
 
-# Test / coverage (frontend)
 coverage/
 *.lcov
 .nyc_output
 lib-cov/
 .vscode-test
 
-# Lint / formatter cache
 .eslintcache
 .stylelintcache
 
-# Parcel / bundler caches
 .cache/
 .parcel-cache/
 .fusebox/
@@ -82,10 +62,6 @@ lib-cov/
 .temp/
 .temp
 
-# -----------------------------------------------------------------------------
-# Python / backend (bansos backend/)
-# -----------------------------------------------------------------------------
-# Virtual environments (any location)
 venv/
 .venv/
 env/
@@ -94,7 +70,6 @@ env.bak/
 venv.bak/
 bansos backend/venv/
 
-# Bytecode & compiled Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -102,7 +77,6 @@ __pycache__/
 *.pyd
 *.pyo
 
-# Distribution / packaging
 .Python
 *.egg
 *.egg-info/
@@ -123,7 +97,6 @@ wheels/
 share/python-wheels/
 .installed.cfg
 
-# Test & type-check caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -137,23 +110,15 @@ coverage.xml
 *.cover
 .hypothesis/
 
-# Jupyter
 .ipynb_checkpoints/
 
-# pyenv / virtualenv tools
 .python-version
 .pdm-python
 
-# -----------------------------------------------------------------------------
-# Supabase local development
-# -----------------------------------------------------------------------------
 .supabase/
 supabase/.branches/
 supabase/.temp/
 
-# -----------------------------------------------------------------------------
-# Logs & runtime
-# -----------------------------------------------------------------------------
 logs/
 *.log
 npm-debug.log*
@@ -167,9 +132,6 @@ pids/
 *.seed
 *.pid.lock
 
-# -----------------------------------------------------------------------------
-# OS-generated files
-# -----------------------------------------------------------------------------
 .DS_Store
 .DS_Store?
 ._*
@@ -182,9 +144,6 @@ Desktop.ini
 $RECYCLE.BIN/
 __MACOSX/
 
-# -----------------------------------------------------------------------------
-# Editors & IDEs
-# -----------------------------------------------------------------------------
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
@@ -203,12 +162,8 @@ __MACOSX/
 *.sublime-project
 *.sublime-workspace
 
-# Cursor (local AI/editor state — optional to keep out of repo)
 .cursor/
 
-# -----------------------------------------------------------------------------
-# Misc temporary / local-only files
-# -----------------------------------------------------------------------------
 tmp/
 temp/
 *.tmp
@@ -218,17 +173,11 @@ temp/
 *.orig
 *.local
 
-# Lock-wscript / legacy
 .lock-wscript
 bower_components/
 .node_repl_history
 *.tgz
 .tern-port
 
-# DynamoDB / Firebase local
 .dynamodb/
 .firebase/
-
-# Large local data dumps (regenerate via backend scripts — uncomment if needed)
-# bansos backend/datasource/raw/
-# bansos backend/datasource/clean/

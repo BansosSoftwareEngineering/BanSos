@@ -308,11 +308,8 @@ export function DashboardPage() {
   const [activeLocationId, setActiveLocationId] = useState<string | null>(null);
   const locDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Controls whether the initial risk-data fetch is allowed to run.
-  // We delay it until we've resolved which location to use (primary vs default).
   const [locationResolved, setLocationResolved] = useState(() => getSavedUserLocation() !== null);
 
-  // Declared BEFORE the useEffect that depends on it to avoid Temporal Dead Zone error
   const updateCoords = useCallback((lat: number, lng: number) => {
     coordsRef.current = { lat, lng };
 
@@ -325,14 +322,10 @@ export function DashboardPage() {
   useEffect(() => {
     const hasCachedLocation = getSavedUserLocation() !== null;
 
-    // If sessionStorage already has coords, risk-data can load immediately.
-    // We still need to fetch saved locations so the dropdown appears.
     if (hasCachedLocation) {
       setLocationResolved(true);
     }
 
-    // Always fetch saved locations — needed for the "Lokasi Tersimpan" dropdown
-    // regardless of whether a session-cached location exists.
     supabase.auth.getUser().then(async ({ data }) => {
       if (!data.user) {
         if (!hasCachedLocation) setLocationResolved(true);
@@ -348,10 +341,8 @@ export function DashboardPage() {
             l.latitude != null && l.longitude != null,
         );
 
-        // Always populate the dropdown list
         setSavedLocations(locsWithCoords);
 
-        // Only override coordinates when sessionStorage has nothing
         if (!hasCachedLocation && locsWithCoords.length > 0) {
           const primary =
             (primaryId ? locsWithCoords.find((l) => l.id === primaryId) : undefined) ??
@@ -363,9 +354,7 @@ export function DashboardPage() {
           setUsingUserLocation(false);
         }
       } catch {
-        // non-critical — fall back to coords already in coordsRef
       } finally {
-        // Mark resolved only if we hadn't already done so above
         if (!hasCachedLocation) setLocationResolved(true);
       }
     });
@@ -441,7 +430,6 @@ export function DashboardPage() {
     setUsingUserLocation(false);
     setLocationLoading(true);
 
-    // Persist the chosen location so Risk Analysis & Map pages use it too
     saveSessionLocation(loc.latitude, loc.longitude);
     saveSessionLocationName(loc.name ?? loc.address ?? 'Lokasi Tersimpan');
     window.dispatchEvent(new Event('bansos-location-updated'));
@@ -463,7 +451,6 @@ export function DashboardPage() {
 
       setUsingUserLocation(true);
 
-      // Persist GPS coords so Risk Analysis & Map pages use the same location
       saveSessionLocation(location.latitude, location.longitude);
       saveSessionLocationName('Lokasi GPS Anda');
       window.dispatchEvent(new Event('bansos-location-updated'));
@@ -478,14 +465,11 @@ export function DashboardPage() {
     }
   };
 
-  // Only start fetching risk data once the primary location has been resolved
   useEffect(() => {
     if (!locationResolved) return;
 
     loadRiskData();
 
-    // Refresh setiap 10 menit — selaras dengan cache TTL di api.ts (TTL_FLOOD_RISK).
-    // Interval lebih pendek tidak akan mengirim request baru karena cache masih segar.
     const interval = window.setInterval(() => {
       loadRiskData();
     }, 10 * 60 * 1000);

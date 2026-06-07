@@ -11,7 +11,6 @@ export function DashboardLayout() {
       <TopNav onMenuToggle={() => setSidebarOpen((v) => !v)} />
 
       <div className="flex flex-1 overflow-hidden relative">
-        {/* Mobile backdrop */}
         {sidebarOpen && (
           <div
             className="fixed inset-0 z-40 bg-black/60 lg:hidden"

@@ -337,7 +337,6 @@ export function SettingsPage() {
     }
   };
 
-  // ── Add Location modal ──────────────────────────────────────
   const [showAddModal, setShowAddModal] = useState(false);
   const [newName, setNewName] = useState('');
   const [newAddress, setNewAddress] = useState('');
@@ -439,7 +438,6 @@ export function SettingsPage() {
     }
   };
 
-  // ── Edit Radius modal ───────────────────────────────────────
   const [editingLocation, setEditingLocation] = useState<SavedLocation | null>(null);
   const [editRadius, setEditRadius] = useState(3);
 
@@ -617,9 +615,7 @@ export function SettingsPage() {
 
   return (
     <div className="p-4 lg:p-6 text-[#e1e2ec] space-y-6">
-      {/* Profile Header Bento */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
-        {/* User Info Card — spans 2 cols */}
         <div className="md:col-span-2 bg-[#191b23] border border-[#e1e2ec]/20 rounded-xl overflow-hidden relative shadow-[0px_4px_12px_0px_rgba(9,30,66,0.08)]">
           <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,82,204,0.1)] to-transparent pointer-events-none" />
 
@@ -775,7 +771,6 @@ export function SettingsPage() {
           </div>
         </div>
 
-        {/* Stats/Actions Card */}
         <div className="bg-[#191b23] border border-[#e1e2ec]/20 rounded-xl shadow-[0px_4px_6px_rgba(9,30,66,0.08)]">
           <div className="flex flex-col gap-4 p-5 lg:p-6 h-full justify-center">
             <div className="flex items-center justify-between">
@@ -788,7 +783,6 @@ export function SettingsPage() {
               <BarChart2 size={28} className="text-[#e1e2ec] opacity-80" />
             </div>
             <div className="h-px bg-[#e1e2ec]/30" />
-            {/* View Reports button */}
             <button
               onClick={() => navigate('/dashboard/reports')}
               className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#e1e2ec] hover:bg-[#c5c8d6] text-[#191b23] text-sm font-semibold transition-colors"
@@ -800,7 +794,6 @@ export function SettingsPage() {
         </div>
       </div>
 
-      {/* Saved Locations */}
       <div>
         <div className="flex items-start justify-between mb-3">
           <div>
@@ -828,7 +821,6 @@ export function SettingsPage() {
               key={loc.id}
               className="bg-[#1d2027] border border-[rgba(255,255,255,0.08)] rounded-xl overflow-hidden"
             >
-              {/* Map preview */}
               <div className="relative h-32 overflow-hidden bg-[#2a2d36]">
                 <img src={imgMapView} alt="" className="w-full h-full object-cover opacity-70" />
                 <div className="absolute top-3 right-3">
@@ -841,14 +833,12 @@ export function SettingsPage() {
                     {loc.status === 'clear' ? 'Clear' : 'Alert'}
                   </span>
                 </div>
-                {/* Radius badge */}
                 <div className="absolute bottom-2 left-3">
                   <span className="text-[12px] font-medium px-2 py-0.5 rounded-full bg-black/60 text-[#ffffff]">
                    Radius {loc.radius} km
                   </span>
                 </div>
               </div>
-              {/* Info */}
               <div className="p-4">
                 <div className="flex items-start justify-between gap-2 mb-1">
                   <div className="flex items-center gap-1.5">
@@ -881,7 +871,6 @@ export function SettingsPage() {
             </div>
           ))}
 
-          {/* Add New Location card */}
           {!locationsLoading && (
             <button
               onClick={openAddModal}
@@ -899,7 +888,6 @@ export function SettingsPage() {
         </div>
       </div>
 
-      {/* Settings Rows */}
       <div className="bg-[#1d2027] border border-[rgba(255,255,255,0.06)] rounded-xl overflow-hidden">
         {settingsRows.map((row, i) => (
           <button
@@ -924,7 +912,6 @@ export function SettingsPage() {
       </div>
 
 
-      {/* ── Notification Preferences Modal ─────────────────────── */}
       {showNotificationModal && (
         <div
           className="fixed inset-0 z-[2000] flex items-center justify-center p-4"
@@ -1060,7 +1047,6 @@ export function SettingsPage() {
         </div>
       )}
 
-      {/* ── Privacy & Security Modal ───────────────────────────── */}
       {showSecurityModal && (
         <div
           className="fixed inset-0 z-[2000] flex items-center justify-center p-4"
@@ -1186,11 +1172,9 @@ export function SettingsPage() {
         </div>
       )}
 
-      {/* ── Add Location Modal ─────────────────────────────────── */}
       {showAddModal && (
         <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}>
           <div className="w-full max-w-md bg-[#1d2027] border border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden shadow-2xl">
-            {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[rgba(255,255,255,0.07)]">
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-[#adc6ff]" />
@@ -1201,9 +1185,7 @@ export function SettingsPage() {
               </button>
             </div>
 
-            {/* Body */}
             <div className="px-5 py-5 space-y-4">
-              {/* Name */}
               <div>
                 <label className="block text-[#8c909f] text-xs font-medium mb-1.5 uppercase tracking-wide">Nama Lokasi</label>
                 <input
@@ -1215,7 +1197,6 @@ export function SettingsPage() {
                 />
               </div>
 
-              {/* Address */}
               <div className="relative" ref={suggestionBoxRef}>
                 <label className="block text-[#8c909f] text-xs font-medium mb-1.5 uppercase tracking-wide">Alamat</label>
                 <div className="relative">
@@ -1277,7 +1258,6 @@ export function SettingsPage() {
                 )}
               </div>
 
-              {/* Monitoring Radius */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-[#8c909f] text-xs font-medium uppercase tracking-wide">Radius Pantauan</label>
@@ -1298,7 +1278,6 @@ export function SettingsPage() {
                 </div>
               </div>
 
-              {/* Status */}
               <div>
                 <label className="block text-[#8c909f] text-xs font-medium mb-1.5 uppercase tracking-wide">Status</label>
                 <div className="flex gap-2">
@@ -1322,12 +1301,10 @@ export function SettingsPage() {
               </div>
             </div>
 
-            {/* Error */}
             {locationError && (
               <p className="px-5 pb-2 text-[#ffb4ab] text-xs">{locationError}</p>
             )}
 
-            {/* Footer */}
             <div className="flex gap-3 px-5 pb-5">
               <button
                 onClick={() => { setShowAddModal(false); setLocationError(''); }}
@@ -1347,11 +1324,9 @@ export function SettingsPage() {
         </div>
       )}
 
-      {/* ── Edit Radius Modal ──────────────────────────────────── */}
       {editingLocation && (
         <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}>
           <div className="w-full max-w-sm bg-[#1d2027] border border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden shadow-2xl">
-            {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[rgba(255,255,255,0.07)]">
               <div className="flex items-center gap-2">
                 <Edit3 size={15} className="text-[#adc6ff]" />
@@ -1362,9 +1337,7 @@ export function SettingsPage() {
               </button>
             </div>
 
-            {/* Body */}
             <div className="px-5 py-5 space-y-5">
-              {/* Location name */}
               <div className="flex items-center gap-2 bg-[rgba(255,255,255,0.04)] rounded-lg px-4 py-3">
                 <MapPin size={14} className="text-[#adc6ff] shrink-0" />
                 <div className="min-w-0">
@@ -1373,7 +1346,6 @@ export function SettingsPage() {
                 </div>
               </div>
 
-              {/* Radius slider */}
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-[#8c909f] text-xs font-medium uppercase tracking-wide">Monitoring Radius</p>
@@ -1397,7 +1369,6 @@ export function SettingsPage() {
                   <span>15 km</span>
                 </div>
 
-                {/* Visual radius ticks */}
                 <div className="mt-4 grid grid-cols-5 gap-1.5">
                   {[1, 3, 5, 10, 15].map((v) => (
                     <button
@@ -1416,7 +1387,6 @@ export function SettingsPage() {
               </div>
             </div>
 
-            {/* Footer */}
             <div className="flex gap-3 px-5 pb-5">
               <button
                 onClick={() => setEditingLocation(null)}

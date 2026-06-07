@@ -6,7 +6,6 @@ from src.risk_engine.water_station_engine import find_nearest_water_station
 from src.risk_engine.weather_engine import get_weather_score
 
 
-# Absolute path agar tidak bergantung pada CWD saat uvicorn dijalankan
 _BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
 STATIC_FEATURE_PATH = _BACKEND_DIR / "datasource/processed/city_static_features.csv"
 
@@ -161,7 +160,6 @@ if __name__ == "__main__":
     test_lat = -6.200000
     test_lng = 106.816666
 
-    # sementara pakai ADM4 Kemayoran contoh BMKG
 
     result = predict_flood_risk(test_lat, test_lng)
 

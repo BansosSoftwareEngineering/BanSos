@@ -1,4 +1,3 @@
-// Mock data for incident reports
 export interface Report {
   id: string;
   title: string;

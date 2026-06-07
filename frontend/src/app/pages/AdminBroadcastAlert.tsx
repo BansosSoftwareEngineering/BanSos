@@ -183,21 +183,6 @@ export function BroadcastAlert() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
 
-  /*
-    Ref ini dipakai untuk mencegah dropdown muncul lagi
-    setelah admin memilih salah satu lokasi.
-
-    Masalah sebelumnya:
-    - Admin klik lokasi.
-    - searchQuery berubah.
-    - Request search lama masih berjalan.
-    - Response lama masuk lagi dan dropdown muncul lagi.
-
-    Fix:
-    - Semua request lama di-abort.
-    - Saat lokasi sudah dipilih, query tersebut ditandai sebagai selected.
-    - useEffect tidak akan fetch ulang untuk query yang sudah dipilih.
-  */
   const searchAbortRef = useRef<AbortController | null>(null);
   const locationAlreadySelectedRef = useRef(false);
   const selectedQueryRef = useRef('');
