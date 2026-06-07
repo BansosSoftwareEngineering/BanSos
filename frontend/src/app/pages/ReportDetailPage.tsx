@@ -299,7 +299,6 @@ export function ReportDetailPage() {
   return (
     <div className="min-h-screen w-full bg-slate-50 text-slate-950 dark:bg-[#10131a] dark:text-[#e1e2ec]">
       <div className="relative mx-auto w-full max-w-[1440px] pb-8">
-        {/* Hero Section */}
         <div
           className="relative overflow-hidden"
           style={{ height: 'clamp(260px, 40vw, 420px)' }}
@@ -340,11 +339,8 @@ export function ReportDetailPage() {
           </div>
         </div>
 
-        {/* Content Grid */}
         <div className="mt-4 flex flex-col gap-4 px-4 lg:mt-6 lg:grid lg:grid-cols-12 lg:gap-6 lg:px-8">
-          {/* Main Column */}
           <div className="flex flex-col gap-4 lg:col-span-8 lg:gap-6">
-            {/* Status Banner */}
             <div className="flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm lg:items-center dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1d2027]">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600 lg:h-12 lg:w-12 dark:bg-[rgba(173,198,255,0.16)] dark:text-[#adc6ff]">
                 {isVerified ? (
@@ -378,7 +374,6 @@ export function ReportDetailPage() {
               </div>
             </div>
 
-            {/* Description */}
             <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm lg:p-6 dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1d2027]">
               <h2 className="mb-3 text-lg font-semibold text-slate-950 lg:text-2xl dark:text-[#e1e2ec]">
                 Situation Overview
@@ -389,7 +384,6 @@ export function ReportDetailPage() {
               </p>
             </div>
 
-            {/* Metadata Grid */}
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
               {[
                 {
@@ -431,7 +425,6 @@ export function ReportDetailPage() {
               ))}
             </div>
 
-            {/* Media Gallery */}
             {(mediaImages.length > 0 || mediaVideos.length > 0) && (
               <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm lg:p-6 dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1d2027]">
                 <div className="mb-4 flex items-center gap-2">
@@ -474,9 +467,7 @@ export function ReportDetailPage() {
             )}
           </div>
 
-          {/* Sidebar Column */}
           <div className="flex flex-col gap-4 lg:col-span-4 lg:gap-6">
-            {/* Map */}
             <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1d2027]">
               <div style={{ height: '180px', position: 'relative' }}>
                 <MapContainer
@@ -532,7 +523,6 @@ export function ReportDetailPage() {
               </div>
             </div>
 
-            {/* Action Panel */}
             <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm lg:p-6 dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1d2027]">
               <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-[#8c909f]">
                 Tindakan Lapangan
@@ -664,7 +654,6 @@ export function ReportDetailPage() {
           </div>
         </div>
 
-        {/* Floating top bar */}
         <div className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between px-4 py-4 lg:px-8 lg:py-6">
           <button
             onClick={() => navigate(-1)}
@@ -683,7 +672,6 @@ export function ReportDetailPage() {
         </div>
       </div>
 
-      {/* Feedback Popup */}
       {feedbackType && (
         <div
           className="fixed inset-0 z-[3000] flex items-center justify-center p-4"

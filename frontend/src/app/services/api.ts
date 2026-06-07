@@ -9,12 +9,6 @@ interface CacheEntry<T> {
 const _apiCache = new Map<string, CacheEntry<unknown>>();
 const _inFlight = new Map<string, Promise<unknown>>();
 
-/**
- * Jalankan `fetcher` dengan cache + deduplication otomatis.
- * @param key     Cache key unik, mis. "flood:-6.2088:106.8456"
- * @param ttlMs   Lama cache valid dalam milidetik
- * @param fetcher Fungsi async yang benar-benar memanggil API
- */
 async function cachedFetch<T>(
   key: string,
   ttlMs: number,
@@ -40,15 +34,12 @@ async function cachedFetch<T>(
   return promise;
 }
 
-/** Bulatkan koordinat ke 4 desimal (~11 m) agar cache-hit lebih tinggi */
 const toKey = (prefix: string, lat: number, lng: number) =>
   `${prefix}:${lat.toFixed(4)}:${lng.toFixed(4)}`;
 
-// TTL per endpoint
-const TTL_FLOOD_RISK = 10 * 60 * 1000; // 10 menit
-const TTL_FORECAST = 30 * 60 * 1000; // 30 menit
+const TTL_FLOOD_RISK = 10 * 60 * 1000;
+const TTL_FORECAST = 30 * 60 * 1000;
 
-// ── Flood Risk Response Types ───────────────────────────────────
 
 export interface FloodRiskLocation {
   lat: number;
@@ -129,8 +120,6 @@ export interface FloodRiskResponse {
   };
   disclaimer: string;
 }
-
-// ── Database/API Types ──────────────────────────────────────────
 
 export interface ReportMedia {
   id: string;
@@ -284,7 +273,6 @@ async function parseJsonResponse<T>(response: Response, fallbackMessage: string)
   return response.json() as Promise<T>;
 }
 
-// ── Risk API Functions ─────────────────────────────────────────
 
 export async function fetchFloodRisk(lat: number, lng: number): Promise<FloodRiskResponse> {
   return cachedFetch(toKey('flood', lat, lng), TTL_FLOOD_RISK, async () => {
@@ -315,7 +303,6 @@ export async function pingBackend(): Promise<boolean> {
   }
 }
 
-// ── Report API Functions ───────────────────────────────────────
 
 export async function createReport(payload: ReportPayload): Promise<{ success: boolean; data: CommunityReport }> {
   const response = await fetch(`${API_BASE}/reports`, {
@@ -458,8 +445,6 @@ export async function updateReportStatus(
   return parseJsonResponse(response, 'Failed to update report status');
 }
 
-// ── Admin/Broadcast API Functions ──────────────────────────────
-
 export async function fetchAdminOverview(): Promise<{ success: boolean; data: AdminOverview }> {
   const response = await fetch(`${API_BASE}/admin/overview`, {
     method: 'GET',
@@ -492,7 +477,6 @@ export async function fetchBroadcasts(): Promise<{ success: boolean; data: Broad
   return parseJsonResponse(response, 'Failed to fetch broadcasts');
 }
 
-// ── User Notifications API Functions ───────────────────────────
 
 export async function fetchUserNotifications(
   userId: string
@@ -519,7 +503,6 @@ export async function markNotificationAsRead(
   return parseJsonResponse(response, 'Failed to mark notification as read');
 }
 
-// ── Saved Locations API Functions ──────────────────────────────
 
 export async function fetchSavedLocations(userId: string): Promise<{ success: boolean; data: SavedLocation[] }> {
   const response = await fetch(`${API_BASE}/saved-locations?user_id=${encodeURIComponent(userId)}`, {
@@ -558,7 +541,6 @@ export async function deleteSavedLocation(locationId: string): Promise<{ success
   return parseJsonResponse(response, 'Failed to delete saved location');
 }
 
-// ── Notification Preferences API Functions ─────────────────────
 
 export async function fetchNotificationPreferences(
   userId: string,
@@ -590,28 +572,15 @@ export async function updateNotificationPreferences(
   return parseJsonResponse(response, 'Failed to update notification preferences');
 }
 
-// ── Hourly Forecast (Open-Meteo) ───────────────────────────────
 
-/**
- * Single data-point returned by fetchHourlyForecast.
- * `rainfall` is real accumulated precipitation in mm for that hour.
- */
 export interface HourlyForecastPoint {
-  /** Human-readable hour label, e.g. "06:00" */
   time: string;
-  /** Sequential index 0-47 across 48 hours */
   index: number;
-  /** Chart axis tick label shown every 8 hours, e.g. "0d 06h" */
   label: string;
-  /** Precipitation in mm (= mm/hr for hourly data) */
   rainfall: number;
 }
 
-/**
- * Fetch real 48-hour hourly precipitation forecast from Open-Meteo.
- * Free API — no key required.
- * Throws if the network request fails.
- */
+
 export async function fetchHourlyForecast(
   lat: number,
   lng: number,
@@ -650,8 +619,6 @@ export async function fetchHourlyForecast(
     });
   });
 }
-
-// ── Helper Formatters ───────────────────────────────────────────
 
 export function riskLevelToLabel(level: string): string {
   switch (level) {

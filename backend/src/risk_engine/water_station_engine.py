@@ -6,9 +6,7 @@ from math import radians, sin, cos, sqrt, atan2
 
 XML_URL = "https://poskobanjir.dsdadki.web.id/xmldata.xml"
 
-# Data tinggi muka air biasanya tidak selalu update per menit.
-# 24 jam lebih aman untuk aplikasi decision-support,
-# supaya tidak false warning ketika beberapa pos air update lebih lambat.
+
 DEFAULT_MAX_AGE_HOURS = 24
 
 
@@ -228,8 +226,6 @@ def check_data_freshness(reference_time, max_age_hours=DEFAULT_MAX_AGE_HOURS):
 
     age_hours = (now - reference_time).total_seconds() / 3600
 
-    # Kalau server/API memberi timestamp sedikit di masa depan,
-    # jangan dianggap error. Anggap fresh.
     if age_hours < 0:
         age_hours = 0
 
@@ -273,9 +269,6 @@ def find_nearest_water_station(user_lat, user_lng, max_age_hours=DEFAULT_MAX_AGE
 
     adjusted_water_score = raw_water_score
 
-    # Jangan potong score terlalu agresif.
-    # Kalau data benar-benar stale, cukup turunkan 20%,
-    # bukan 50%, supaya risk analysis tidak terlalu bias.
     if not freshness["is_fresh"]:
         adjusted_water_score = raw_water_score * 0.8
 

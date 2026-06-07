@@ -122,7 +122,6 @@ export function RegisterPage() {
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#f6f9ff] px-4 py-6 sm:px-6 lg:px-10">
-      {/* Background */}
       <div className="fixed inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.28),transparent_34%),radial-gradient(circle_at_top_right,rgba(191,219,254,0.55),transparent_32%),linear-gradient(135deg,#f8fbff_0%,#eef5ff_45%,#ffffff_100%)]" />
 
@@ -134,9 +133,7 @@ export function RegisterPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] bg-[size:48px_48px] opacity-40" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 grid w-full max-w-[1120px] grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_480px] lg:gap-14">
-        {/* Left Content */}
         <div className="hidden lg:block">
           <div className="mb-8 flex items-center gap-2">
             <LogoMark size={32} />
@@ -186,10 +183,8 @@ export function RegisterPage() {
           </div>
         </div>
 
-        {/* Register Card */}
         <div className="mx-auto w-full max-w-[460px] lg:max-w-none">
           <div className="relative rounded-[26px] border border-white/70 bg-white/65 p-5 shadow-[0_24px_80px_rgba(37,99,235,0.16)] backdrop-blur-2xl sm:rounded-[32px] sm:p-8 lg:p-10">
-            {/* Mobile Header */}
             <div className="mb-6 flex flex-col items-center text-center lg:hidden">
               <div className="mb-2 flex items-center gap-2">
                 <LogoMark size={26} />
@@ -209,7 +204,6 @@ export function RegisterPage() {
               </p>
             </div>
 
-            {/* Desktop Header */}
             <div className="mb-6 hidden lg:block">
               <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
                 Daftar akun
@@ -229,7 +223,6 @@ export function RegisterPage() {
               className="space-y-4"
               noValidate
             >
-              {/* Full Name */}
               <div className="space-y-1.5">
                 <label className="block text-sm font-semibold text-slate-300 sm:text-base">
                   Nama lengkap
@@ -258,7 +251,6 @@ export function RegisterPage() {
                 )}
               </div>
 
-              {/* Email */}
               <div className="space-y-1.5">
                 <label className="block text-sm font-semibold text-slate-300 sm:text-base">
                   Email
@@ -287,7 +279,6 @@ export function RegisterPage() {
                 )}
               </div>
 
-              {/* Password */}
               <div className="space-y-1.5">
                 <label className="block text-sm font-semibold text-slate-300 sm:text-base">
                   Password
@@ -337,7 +328,6 @@ export function RegisterPage() {
                 )}
               </div>
 
-              {/* Confirm Password */}
               <div className="space-y-1.5">
                 <label className="block text-sm font-semibold text-slate-300 sm:text-base">
                   Konfirmasi password
@@ -377,7 +367,6 @@ export function RegisterPage() {
                   )}
               </div>
 
-              {/* Auth error */}
               {authError && (
                 <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2">
                   <AlertCircle
@@ -390,7 +379,6 @@ export function RegisterPage() {
                 </div>
               )}
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={isLoading}
@@ -400,14 +388,12 @@ export function RegisterPage() {
               </button>
             </form>
 
-            {/* Divider */}
             <div className="my-5 flex items-center gap-4">
               <div className="h-px flex-1 bg-slate-200" />
               <span className="text-sm text-slate-400">atau</span>
               <div className="h-px flex-1 bg-slate-200" />
             </div>
 
-            {/* Google Sign Up */}
             <button
               onClick={handleGoogleSignUp}
               className="flex w-full items-center justify-center gap-3 rounded-xl border border-blue-100 bg-white/70 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:bg-white sm:text-base"
@@ -416,7 +402,6 @@ export function RegisterPage() {
               Daftar dengan Google
             </button>
 
-            {/* Footer */}
             <div className="mt-5 text-center">
               <p className="text-sm text-slate-500 sm:text-base">
                 Sudah punya akun?{' '}

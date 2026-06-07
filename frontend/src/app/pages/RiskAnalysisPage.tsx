@@ -94,10 +94,8 @@ export function RiskAnalysisPage() {
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
-  // Real hourly forecast from Open-Meteo
   const [forecastData, setForecastData] = useState<HourlyForecastPoint[]>([]);
   const [forecastLoading, setForecastLoading] = useState(false);
-  // Label shown in the subheader (e.g. "Alamat Utama" or "Lokasi GPS Anda")
   const [activeLocationLabel, setActiveLocationLabel] = useState<string>("");
   const [savedLocations, setSavedLocations] = useState<SavedLocation[]>([]);
   const [savedLocationsLoading, setSavedLocationsLoading] = useState(true);
@@ -111,7 +109,6 @@ export function RiskAnalysisPage() {
     lng: DEFAULT_LNG,
   });
 
-  // Controls whether the initial risk-data fetch is allowed to run
   const [locationResolved, setLocationResolved] = useState(false);
 
   useEffect(() => {
@@ -167,7 +164,6 @@ export function RiskAnalysisPage() {
       setForecastLoading(true);
       setError(null);
 
-      // Fetch risk data (backend) & hourly forecast (Open-Meteo) secara paralel
       const [riskResult, forecastResult] = await Promise.allSettled([
         fetchFloodRisk(targetLat, targetLng),
         fetchHourlyForecast(targetLat, targetLng),
@@ -180,7 +176,6 @@ export function RiskAnalysisPage() {
         });
         console.log("RISK ANALYSIS RESPONSE:", riskResult.value);
         setRiskData(riskResult.value);
-        // Simpan koordinat asli user/request, bukan centroid polygon backend.
         updateCoords(targetLat, targetLng);
       } else {
         const err = riskResult.reason as any;
@@ -232,7 +227,6 @@ export function RiskAnalysisPage() {
           ),
       );
 
-      // Kalau belum ada pilihan dari Dashboard/session, baru pakai saved location pertama.
       const fallbackSavedLocation =
         !sessionLocation && resolved.source !== "session"
           ? locations[0]
@@ -289,7 +283,6 @@ export function RiskAnalysisPage() {
     [applyResolvedLocation, loadRiskData, loadSavedLocations],
   );
 
-  // ── Resolve active location using the same source as Dashboard ────────
   useEffect(() => {
     let isMounted = true;
 
@@ -305,15 +298,13 @@ export function RiskAnalysisPage() {
     };
   }, [syncLocationWithDashboard]);
 
-  // Saat user pindah dari Dashboard ke Risk Analysis dalam SPA, component bisa saja
-  // tidak selalu full refresh. Karena itu, sync ulang setiap route ini dibuka.
+
   useEffect(() => {
     if (!locationResolved) return;
 
     syncLocationWithDashboard(true);
-  }, [routerLocation.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [routerLocation.pathname]); 
 
-  // Jaga-jaga kalau Dashboard menyimpan session location saat tab masih sama / balik dari tab lain.
   useEffect(() => {
     if (!locationResolved) return;
 
@@ -334,7 +325,6 @@ export function RiskAnalysisPage() {
     };
   }, [locationResolved, syncLocationWithDashboard]);
 
-  // ── Fire risk-data fetch once the location is resolved ────────
   useEffect(() => {
     if (!locationResolved) return;
     loadRiskData();
@@ -365,7 +355,6 @@ export function RiskAnalysisPage() {
     [loadRiskData, savedLocations],
   );
 
-  // ── Explicit GPS override button ──────────────────────────────
   const handleUseMyLocation = useCallback(async () => {
     setLocationLoading(true);
     setError(null);
@@ -386,7 +375,6 @@ export function RiskAnalysisPage() {
         err.message || "Gagal mengambil lokasi GPS. Menggunakan alamat utama.",
       );
 
-      // Fall back to primary saved address — not hardcoded Kemang
       const fallback = await resolvePrimaryLocation();
       const matchedFallback = savedLocations.find(
         (location) =>
@@ -447,7 +435,6 @@ export function RiskAnalysisPage() {
   const isCriticalWater =
     alertStatus.includes("SIAGA 1") || alertStatus.includes("SIAGA 2");
 
-  // 20 mm/hr = "Sangat Lebat" per klasifikasi BMKG — threshold waspada banjir
   const criticalThreshold = 20;
 
   const waterDelta =
@@ -472,7 +459,6 @@ export function RiskAnalysisPage() {
 
   return (
     <div className="p-6 text-[#e1e2ec] space-y-6">
-      {/* Header */}
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-2">
           <h1 className="text-[#e1e2ec] text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -617,7 +603,6 @@ export function RiskAnalysisPage() {
         </div>
       </div>
 
-      {/* Backend / Location Error Banner */}
       {error && (
         <div className="flex items-start gap-3 p-4 rounded-xl bg-[rgba(100,100,100,0.15)] border border-[rgba(255,255,255,0.15)]">
           <WifiOff size={16} className="text-[#8c909f] mt-0.5 shrink-0" />
@@ -636,7 +621,6 @@ export function RiskAnalysisPage() {
         </div>
       )}
 
-      {/* Data freshness warning */}
       {false && waterFreshnessWarning && !loading && !locationLoading && (
         <div className="flex items-start gap-3 p-4 rounded-xl bg-[rgba(92,60,0,0.25)] border border-[rgba(255,183,134,0.25)]">
           <BarChart2 size={16} className="text-[#ffb786] mt-0.5 shrink-0" />
@@ -651,9 +635,7 @@ export function RiskAnalysisPage() {
         </div>
       )}
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-        {/* Weather Score */}
         <div className="bg-[#1d2027] border border-[rgba(255,255,255,0.06)] rounded-xl p-4 sm:p-5 relative overflow-hidden">
           <div className="flex items-start justify-between mb-1 gap-1">
             <p className="text-[#8c909f] text-[10px] sm:text-xs uppercase tracking-wide leading-snug">
@@ -689,7 +671,6 @@ export function RiskAnalysisPage() {
           </p>
         </div>
 
-        {/* Water Level */}
         <div
           className={`bg-[#1d2027] border ${
             isCriticalWater && !loading && !locationLoading
@@ -744,7 +725,6 @@ export function RiskAnalysisPage() {
           </p>
         </div>
 
-        {/* Flood Probability */}
         <div
           className="relative bg-[#1d2027] border border-[rgba(255,255,255,0.06)] rounded-xl p-4 sm:p-5 cursor-pointer hover:border-[rgba(173,198,255,0.35)] transition-colors"
           onMouseEnter={() => setShowProbabilityBreakdown(true)}
@@ -864,7 +844,6 @@ export function RiskAnalysisPage() {
         </div>
       </div>
 
-      {/* Supporting Data */}
       {riskData && !loading && !locationLoading && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="bg-[#1d2027] border border-[rgba(255,255,255,0.06)] rounded-xl p-4">
@@ -894,7 +873,6 @@ export function RiskAnalysisPage() {
         </div>
       )}
 
-      {/* 48-Hour Chart — data nyata dari Open-Meteo */}
       <div className="bg-[#1d2027] border border-[rgba(255,255,255,0.06)] rounded-xl p-4 sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-2 mb-5 sm:mb-6">
           <div>
@@ -918,7 +896,6 @@ export function RiskAnalysisPage() {
 
         <div className="h-64">
           {forecastLoading ? (
-            /* Skeleton loading state */
             <div className="flex items-center justify-center h-full">
               <div className="flex flex-col items-center gap-2">
                 <Loader2 size={22} className="text-[#60a5fa] animate-spin" />
@@ -928,7 +905,6 @@ export function RiskAnalysisPage() {
               </div>
             </div>
           ) : forecastData.length === 0 ? (
-            /* Empty / error state */
             <div className="flex items-center justify-center h-full">
               <div className="flex flex-col items-center gap-2 text-center">
                 <WifiOff size={20} className="text-[#8c909f]" />
@@ -1018,7 +994,6 @@ export function RiskAnalysisPage() {
         </div>
       </div>
 
-      {/* Disclaimer */}
       {riskData?.disclaimer && (
         <p className="text-[#8c909f] text-[10px] sm:text-xs italic text-center px-4">
           {riskData.disclaimer}

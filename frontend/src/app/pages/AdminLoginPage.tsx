@@ -54,7 +54,6 @@ export function AdminLoginPage() {
       className="min-h-screen flex flex-col items-center justify-center px-4"
       style={{ background: 'linear-gradient(160deg, #0b0e15 0%, #10131a 60%, #0d1221 100%)' }}
     >
-      {/* Back button */}
       <button
         onClick={() => navigate('/dashboard')}
         className="absolute top-6 left-6 flex items-center gap-2 text-[#8c909f] hover:text-[#e1e2ec] text-sm transition-colors"
@@ -63,12 +62,10 @@ export function AdminLoginPage() {
         Back to Dashboard
       </button>
 
-      {/* Card */}
       <div
         className="w-full max-w-sm bg-[#1d2027] border border-[rgba(255,255,255,0.08)] rounded-2xl p-8 shadow-2xl"
         style={{ boxShadow: '0 0 60px rgba(173,198,255,0.04), 0 24px 48px rgba(0,0,0,0.5)' }}
       >
-        {/* Icon + Title */}
         <div className="flex flex-col items-center mb-8">
           <div
             className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
@@ -87,7 +84,6 @@ export function AdminLoginPage() {
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
-          {/* Email */}
           <div className="space-y-1.5">
             <label className="text-[#c2c6d6] text-xs uppercase tracking-widest font-semibold">
               Email Admin
@@ -105,7 +101,6 @@ export function AdminLoginPage() {
             </div>
           </div>
 
-          {/* Password */}
           <div className="space-y-1.5">
             <label className="text-[#c2c6d6] text-xs uppercase tracking-widest font-semibold">
               Password
@@ -130,14 +125,12 @@ export function AdminLoginPage() {
             </div>
           </div>
 
-          {/* Error */}
           {error && (
             <p className="text-[#ffb4ab] text-xs bg-[rgba(255,68,68,0.08)] border border-[rgba(255,68,68,0.2)] rounded-lg px-3 py-2">
               {error}
             </p>
           )}
 
-          {/* Submit */}
           <button
             type="submit"
             disabled={loading}

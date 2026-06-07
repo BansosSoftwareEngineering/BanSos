@@ -85,7 +85,6 @@ def calculate_weather_score(df):
 
     df = df.sort_values("local_datetime").reset_index(drop=True)
 
-    # pakai English kalau ada, fallback ke Indo
     df["weather_text"] = df["weather_desc_en"].fillna(df["weather_desc"])
 
     df["rain_score"] = df["weather_text"].apply(weather_to_rain_score)
@@ -135,7 +134,6 @@ def get_weather_score(adm4_code):
 
 
 if __name__ == "__main__":
-    # contoh: Kemayoran
     adm4_code = "31.71.03.1001"
 
     result = get_weather_score(adm4_code)

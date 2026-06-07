@@ -11,10 +11,6 @@ export function AuthCallbackPage() {
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
 
-    /** Determines next destination after successful auth:
-     *  - First-time user  → /onboarding
-     *  - Returning user   → /dashboard
-     */
     const getDestination = async (): Promise<string> => {
       const { data } = await supabase.auth.getUser();
       const complete = data.user?.user_metadata?.onboarding_complete;
@@ -33,7 +29,6 @@ export function AuthCallbackPage() {
         }
       });
     } else {
-      // Fallback: check if session already exists (implicit flow)
       supabase.auth.getSession().then(async ({ data }) => {
         if (data.session) {
           setStatus('success');
