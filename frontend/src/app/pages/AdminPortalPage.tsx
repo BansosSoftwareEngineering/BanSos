@@ -17,6 +17,7 @@ import {
 import { BroadcastAlert } from './AdminBroadcastAlert';
 import { VerifyReports } from './AdminVerifyReports';
 import { AdminOverview, CommunityReport, fetchAdminOverview, fetchReports, updateReportStatus } from '../services/api';
+import { supabase } from '../services/supabaseClient';
 
 const severityColor: Record<string, string> = {
   KRITIS:
@@ -306,7 +307,19 @@ export function AdminPortalPage() {
           </div>
         </div>
         <button
-          onClick={() => { sessionStorage.removeItem('admin_auth'); navigate('/dashboard'); }}
+          onClick={async () => {
+            sessionStorage.removeItem('admin_auth');
+            const prevSessionStr = sessionStorage.getItem('prev_user_session');
+            if (prevSessionStr) {
+              sessionStorage.removeItem('prev_user_session');
+              try {
+                const { access_token, refresh_token } = JSON.parse(prevSessionStr) as { access_token: string; refresh_token: string };
+                await supabase.auth.setSession({ access_token, refresh_token });
+              } catch { /* session expired, fall through to login */ }
+            }
+            window.dispatchEvent(new Event('bansos-profile-updated'));
+            navigate('/dashboard');
+          }}
           className="flex items-center gap-1.5 text-[#8c909f] hover:text-[#e1e2ec] text-xs transition-colors"
         >
           <LogOut size={13} /> Keluar

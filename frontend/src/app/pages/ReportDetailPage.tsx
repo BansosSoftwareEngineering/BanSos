@@ -324,18 +324,16 @@ export function ReportDetailPage() {
               </span>
             </div>
 
-            <div className="w-fit max-w-3xl rounded-2xl bg-black/65 px-4 py-3 shadow-2xl backdrop-blur-[2px]">
-              <h1
-  className="max-w-3xl text-2xl font-black leading-tight sm:text-3xl lg:text-4xl"
-  style={{
-    color: '#eaf1ff',
-    textShadow:
-      '0 2px 4px rgba(0,0,0,0.95), 0 6px 18px rgba(0,0,0,0.85)',
-  }}
->
-  {report.title}
-</h1>
-            </div>
+            <h1
+              className="max-w-3xl text-2xl font-black leading-tight sm:text-3xl lg:text-4xl"
+              style={{
+                color: '#eaf1ff',
+                textShadow:
+                  '0 2px 4px rgba(0,0,0,0.95), 0 6px 18px rgba(0,0,0,0.85)',
+              }}
+            >
+              {report.title}
+            </h1>
           </div>
         </div>
 
