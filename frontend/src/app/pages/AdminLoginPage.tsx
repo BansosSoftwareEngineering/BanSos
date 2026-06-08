@@ -17,6 +17,14 @@ export function AdminLoginPage() {
     setLoading(true);
 
     try {
+      const { data: currentSession } = await supabase.auth.getSession();
+      if (currentSession.session) {
+        sessionStorage.setItem('prev_user_session', JSON.stringify({
+          access_token: currentSession.session.access_token,
+          refresh_token: currentSession.session.refresh_token,
+        }));
+      }
+
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
