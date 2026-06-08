@@ -537,8 +537,8 @@ export function CreateReportPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)]">
       <div
-        className="sticky top-0 z-50 h-16 flex items-center gap-3 px-4 sm:px-6 backdrop-blur-sm border-b border-[rgba(255,255,255,0.5)]"
-        style={{ background: 'rgba(240,240,240,0.5)' }}
+        className="sticky top-0 z-50 h-16 flex items-center gap-3 px-4 sm:px-6 backdrop-blur-sm border-b border-[rgba(255,255,255,0.08)]"
+        style={{ background: 'rgba(16,19,26,0.85)' }}
       >
         <button
           onClick={() => navigate(-1)}
