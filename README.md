@@ -412,9 +412,9 @@ Penjelasan singkat:
 
 Sebelum menjalankan project, pastikan beberapa tools berikut sudah tersedia:
 
-- [Node.js 16+]
-- [Git]
-- [Python 3.10+]
+- Node.js 16+
+- Git
+- Python 3.10+
 - Supabase account
 
 ---
