@@ -54,7 +54,7 @@ Link: https://ban-sos.vercel.app/
 
 ## 🎯 Problem Solved
 
-Jakarta merupakan salah satu wilayah yang sering menghadapi risiko banjir. Informasi banjir sering kali tersebar dari banyak sumber dan tidak selalu mudah diverifikasi. Dengan ini *BanSos* mencoba membantu masalah tersebut dengan menyediakan platform yang menggabungkan laporan komunitas, analisis risiko berdasarkan lokasi, dan proses verifikasi oleh admin.
+Jakarta merupakan salah satu wilayah yang sering menghadapi risiko banjir. Informasi banjir sering kali tersebar dari banyak sumber dan tidak selalu mudah diverifikasi yang menyebabkan misinformasi. Dengan ini *BanSos* mencoba membantu masalah tersebut dengan menyediakan platform yang menggabungkan laporan komunitas, analisis risiko berdasarkan lokasi, dan proses verifikasi oleh admin.
 
 Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka, membuat laporan baru dengan bukti media seperti photo/video, menyimpan lokasi penting yang ingin di monitor, dan mendapatkan informasi risiko banjir yang lebih terarah.
 
@@ -192,13 +192,13 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
 
 Project BanSos dikembangkan menggunakan pendekatan Agile/Scrum sederhana. Selama proses pengerjaan, fitur dibagi ke dalam beberapa backlog dan dikerjakan secara bertahap melalui sprint. Pendekatan ini digunakan supaya pembagian tugas lebih jelas, progress lebih mudah dipantau, dan setiap fitur bisa diuji sebelum digabungkan ke versi utama project.
 
-Dalam project ini, tim membagi pekerjaan ke beberapa area utama, yaitu frontend, backend, database, authentication, report system, risk analysis, admin verification, dan deployment.
+Dalam project ini, kami membagi pekerjaan ke beberapa area utama, yaitu frontend, backend, database, authentication, report system, risk analysis, admin verification, dan deployment.
 
 ---
 
 ### 📋 Product Backlog
 
-Product backlog berisi daftar fitur utama yang direncanakan dalam project BanSos. Backlog ini menjadi target tim untuk menentukan prioritas pengembangan.
+Product backlog berisi daftar fitur utama yang direncanakan dalam project BanSos. Backlog ini menjadi target tim kami untuk menentukan prioritas pengembangan.
 
 | No | Backlog Item             | Description                                                                                 | Priority |
 | -- | ------------------------ | ------------------------------------------------------------------------------------------- | -------- |
@@ -278,7 +278,7 @@ Sprint backlog digunakan untuk membagi pekerjaan menjadi task yang lebih kecil. 
 
 ### 🔄 Development Workflow
 
-Selama pengerjaan project, tim menggunakan GitHub untuk menyimpan source code dan mengatur perubahan yang dibuat oleh setiap anggota. Setiap perubahan fitur atau perbaikan dilakukan melalui branch agar tidak langsung mengganggu branch utama.
+Selama pengerjaan project Bansos, kami menggunakan GitHub untuk menyimpan source code dan mengatur perubahan yang dibuat oleh setiap anggota. Setiap perubahan fitur atau perbaikan dilakukan melalui branch agar tidak langsung mengganggu branch utama.
 
 Workflow yang digunakan:
 
