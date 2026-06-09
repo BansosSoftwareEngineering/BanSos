@@ -78,6 +78,160 @@ Link: https://ban-sos.vercel.app/
 - Frontend: Vercel
 - Backend: Hugging Face Spaces menggunakan Docker
 - Database/Auth/Storage: Supabase
+  
+---
+
+## Software Engineering Process
+
+Project BanSos dikembangkan menggunakan pendekatan Agile/Scrum sederhana. Selama proses pengerjaan, fitur dibagi ke dalam beberapa backlog dan dikerjakan secara bertahap melalui sprint. Pendekatan ini digunakan supaya pembagian tugas lebih jelas, progress lebih mudah dipantau, dan setiap fitur bisa diuji sebelum digabungkan ke versi utama project.
+
+Dalam project ini, tim membagi pekerjaan ke beberapa area utama, yaitu frontend, backend, database, authentication, report system, risk analysis, admin verification, dan deployment.
+
+---
+
+### Product Backlog
+
+Product backlog berisi daftar fitur utama yang direncanakan dalam project BanSos. Backlog ini menjadi target tim untuk menentukan prioritas pengembangan.
+
+| No | Backlog Item             | Description                                                                                 | Priority |
+| -- | ------------------------ | ------------------------------------------------------------------------------------------- | -------- |
+| 1  | User Authentication      | User dapat register, login, verifikasi email, dan reset password menggunakan Supabase Auth. | High     |
+| 2  | Dashboard                | User dapat melihat lokasi yang dipilih, status risiko banjir, dan laporan sekitar.          | High     |
+| 3  | Interactive Map          | Website menampilkan peta interaktif untuk melihat lokasi user dan laporan banjir terdekat.  | High     |
+| 4  | Incident Report System   | User dapat membuat laporan banjir dengan lokasi, severity, deskripsi, dan media pendukung.  | High     |
+| 5  | Report Media Upload      | User dapat upload foto/video sebagai bukti laporan banjir.                                  | High     |
+| 6  | Risk Analysis            | Sistem dapat menampilkan analisis risiko banjir berdasarkan koordinat lokasi.               | High     |
+| 7  | Saved Locations          | User dapat menyimpan lokasi penting seperti rumah, kampus, kantor, atau lokasi lain.        | Medium   |
+| 8  | My Reports               | User dapat melihat laporan yang pernah dibuat dan melihat status kontribusinya.             | Medium   |
+| 9  | Admin Verification       | Admin dapat approve atau reject laporan yang masuk dari user.                               | High     |
+| 10 | Broadcast Alert          | Admin dapat mengirim peringatan ke area tertentu berdasarkan lokasi dan radius.             | Medium   |
+| 11 | Notification Preferences | User dapat mengatur jenis notifikasi yang ingin diterima.                                   | Medium   |
+| 12 | Light/Dark Mode          | Website mendukung tampilan light mode dan dark mode.                                        | Low      |
+| 13 | Deployment               | Frontend, backend, dan Supabase dapat berjalan di production environment.                   | High     |
+
+---
+
+### Sprint Backlog
+
+Sprint backlog digunakan untuk membagi pekerjaan menjadi task yang lebih kecil. Setiap sprint berfokus pada fitur tertentu agar proses development lebih terarah.
+
+#### Sprint 1 - Project Setup & Basic Structure
+
+| Task            | Description                                                      | Status |
+| --------------- | ---------------------------------------------------------------- | ------ |
+| Setup frontend  | Membuat project React, Vite, TypeScript, dan Tailwind CSS.       | Done   |
+| Setup backend   | Membuat struktur awal backend menggunakan FastAPI.               | Done   |
+| Setup Supabase  | Menyiapkan Supabase untuk Authentication, Database, dan Storage. | Done   |
+| Setup routing   | Membuat routing dasar untuk halaman utama website.               | Done   |
+| Setup UI layout | Membuat layout awal untuk login, dashboard, dan halaman utama.   | Done   |
+
+#### Sprint 2 - Authentication & User Flow
+
+| Task               | Description                                                         | Status |
+| ------------------ | ------------------------------------------------------------------- | ------ |
+| Register and login | Menghubungkan register dan login dengan Supabase Auth.              | Done   |
+| Email verification | Menambahkan alur verifikasi email untuk user baru.                  | Done   |
+| Reset password     | Menambahkan forgot password dan reset password page.                | Done   |
+| Session handling   | Mengatur session user agar tetap terbaca setelah refresh.           | Done   |
+| Protected routes   | Membatasi akses halaman tertentu hanya untuk user yang sudah login. | Done   |
+
+#### Sprint 3 - Report System, Map, and Risk Analysis
+
+| Task                 | Description                                                      | Status |
+| -------------------- | ---------------------------------------------------------------- | ------ |
+| Incident report form | Membuat form untuk laporan banjir dari user.                     | Done   |
+| Media upload         | Menambahkan upload foto/video laporan ke Supabase Storage.       | Done   |
+| Interactive map      | Menampilkan peta interaktif menggunakan Leaflet.                 | Done   |
+| Nearby reports       | Menampilkan laporan banjir berdasarkan lokasi user.              | Done   |
+| Risk analysis        | Menampilkan analisis risiko banjir berdasarkan koordinat lokasi. | Done   |
+| Saved locations      | User dapat menyimpan dan memilih lokasi penting.                 | Done   |
+
+#### Sprint 4 - Admin Features
+
+| Task            | Description                                                           | Status |
+| --------------- | --------------------------------------------------------------------- | ------ |
+| Admin portal    | Membuat halaman khusus admin untuk melihat ringkasan data.            | Done   |
+| Verify reports  | Admin dapat approve laporan yang valid.                               | Done   |
+| Reject reports  | Admin dapat reject laporan dengan alasan penolakan.                   | Done   |
+| Broadcast alert | Admin dapat membuat peringatan berdasarkan lokasi dan radius.         | Done   |
+| Admin overview  | Menampilkan total laporan pending, approved, rejected, dan broadcast. | Done   |
+
+#### Sprint 5 - Finalization & Deployment
+
+| Task                    | Description                                                              | Status |
+| ----------------------- | ------------------------------------------------------------------------ | ------ |
+| UI improvement          | Memperbaiki tampilan agar nyaman di light mode dan dark mode.            | Done   |
+| Bug fixing              | Memperbaiki error pada report, map, reset password, dan saved locations. | Done   |
+| Supabase schema cleanup | Merapikan tabel, relasi, dan policy yang digunakan.                      | Done   |
+| Frontend deployment     | Deploy frontend menggunakan Vercel.                                      | Done   |
+| Backend deployment      | Deploy backend menggunakan Hugging Face Spaces.                          | Done   |
+| Documentation           | Membuat README sebagai dokumentasi GitHub project.                       | Done   |
+
+---
+
+### Development Workflow
+
+Selama pengerjaan project, tim menggunakan GitHub untuk menyimpan source code dan mengatur perubahan yang dibuat oleh setiap anggota. Setiap perubahan fitur atau perbaikan dilakukan melalui branch agar tidak langsung mengganggu branch utama.
+
+Workflow yang digunakan:
+
+1. Membuat branch baru untuk fitur atau bug fix.
+2. Mengembangkan fitur di local environment.
+3. Melakukan testing secara local.
+4. Commit perubahan dengan pesan yang jelas.
+5. Push branch ke GitHub.
+6. Membuat pull request ke branch utama.
+7. Melakukan pengecekan sebelum merge.
+8. Deploy perubahan ke environment production jika sudah aman.
+
+Contoh branch yang digunakan selama development:
+
+```txt
+frontend-vercel-deploy
+commit1-update-fix
+commit2-update
+```
+
+---
+
+### Testing Process
+
+Testing dilakukan secara manual dengan mencoba alur utama dari sisi user dan admin. Pengujian ini dilakukan untuk memastikan fitur yang dibuat sudah sesuai dengan kebutuhan dan tidak menyebabkan error pada flow utama aplikasi.
+
+| Test Case              | Expected Result                                                  |
+| ---------------------- | ---------------------------------------------------------------- |
+| User register          | Akun user berhasil dibuat dan masuk ke Supabase Auth.            |
+| User login             | User berhasil masuk ke dashboard.                                |
+| Email verification     | User dapat melakukan verifikasi email.                           |
+| Forgot password        | Link reset password terkirim ke email user.                      |
+| Reset password         | User dapat membuat password baru melalui halaman reset password. |
+| Create incident report | Laporan banjir berhasil dibuat dan masuk ke database.            |
+| Upload report media    | Foto/video laporan berhasil tersimpan di Supabase Storage.       |
+| View nearby reports    | User dapat melihat laporan di sekitar lokasi yang dipilih.       |
+| Saved locations        | User dapat menambah, memilih, dan menghapus lokasi tersimpan.    |
+| Risk analysis          | Sistem menampilkan hasil analisis risiko berdasarkan lokasi.     |
+| Admin approve report   | Laporan berubah menjadi approved dan dapat ditampilkan ke user.  |
+| Admin reject report    | Laporan berubah menjadi rejected dengan alasan penolakan.        |
+| Broadcast alert        | Admin dapat membuat alert berdasarkan lokasi dan radius.         |
+| Light/Dark mode        | Tampilan tetap terbaca dan nyaman di kedua mode.                 |
+
+---
+
+### Deployment Flow
+
+Project ini menggunakan deployment terpisah antara frontend, backend, dan database.
+
+Frontend dideploy menggunakan Vercel karena mudah dihubungkan dengan GitHub dan cocok untuk project React + Vite. Backend dideploy menggunakan Hugging Face Spaces dengan Docker untuk menjalankan FastAPI. Supabase digunakan sebagai layanan cloud untuk Authentication, Database, dan Storage.
+
+Alur deployment:
+
+1. Frontend di-push ke GitHub dan dihubungkan ke Vercel.
+2. Environment variables frontend ditambahkan di Vercel.
+3. Backend disiapkan dengan `Dockerfile`, `requirements.txt`, dan konfigurasi FastAPI.
+4. Backend dideploy ke Hugging Face Spaces.
+5. URL backend dimasukkan ke environment variable frontend.
+6. Supabase dikonfigurasi melalui dashboard, termasuk database schema, auth redirect URL, dan storage bucket.
+7. Website dicoba kembali melalui production URL.
 
 ---
 
