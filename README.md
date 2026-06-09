@@ -336,7 +336,7 @@ Alur deployment:
 
 ---
 
-## 📁 Struktur Folder
+## 📁 Folder Structure
 
 Struktur utama project ini seperti berikut:
 
@@ -408,7 +408,18 @@ Penjelasan singkat:
 
 ---
 
-## 🛠️ Cara Install dan Run Project
+## ✅ Prerequisites
+
+Sebelum menjalankan project, pastikan beberapa tools berikut sudah tersedia:
+
+- [Node.js 16+]
+- [Git]
+- [Python 3.10+]
+- Supabase account
+
+---
+
+## 🛠️ How to Install and Run Locally
 
 ### 1. Clone Repository
 
