@@ -12,7 +12,20 @@ Link: https://ban-sos.vercel.app/
 
 ---
 
-## Fitur Utama
+## Overview
+
+- **Name**: BanSos
+- **Type**: Flood Risk Monitoring & Community Report System
+- **Focus**: Flood risk analysis, community reporting, and admin verification
+- **Target Area**: Jakarta
+- **Main Users**: Public users and admin/verifier
+- **Frontend**: React + Vite
+- **Backend**: FastAPI
+- **Database/Auth/Storage**: Supabase
+  
+---
+
+## Features
 
 ### Untuk User
 
@@ -36,6 +49,19 @@ Link: https://ban-sos.vercel.app/
 - Approve atau reject laporan beserta alasan penolakan.
 - Membuat broadcast alert berdasarkan lokasi dan radius tertentu.
 - Melihat jumlah laporan pending, approved, rejected, dan broadcast yang sudah dibuat.
+
+---
+
+## Problem Solved
+
+Jakarta merupakan salah satu wilayah yang sering menghadapi risiko banjir. Informasi banjir sering kali tersebar dari banyak sumber dan tidak selalu mudah diverifikasi. Dengan ini *BanSos* mencoba membantu masalah tersebut dengan menyediakan platform yang menggabungkan laporan komunitas, analisis risiko berdasarkan lokasi, dan proses verifikasi oleh admin.
+
+Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka, membuat laporan baru dengan bukti media seperti photo/video, menyimpan lokasi penting yang ingin di monitor, dan mendapatkan informasi risiko banjir yang lebih terarah.
+
+---
+
+## Mockups
+
 
 ---
 
