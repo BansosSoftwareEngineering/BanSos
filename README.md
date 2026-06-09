@@ -1,4 +1,4 @@
-# BanSos - Flood Risk & Community Report System
+# 🌊 BanSos - Flood Risk & Community Report System
 
 BanSos adalah website untuk membantu pengguna memantau risiko banjir di sekitar Jakarta. Melalui website ini, pengguna bisa membuat laporan kejadian banjir dan melihat informasi laporan dari warga lain berdasarkan lokasi pengguna tersebut. Project ini dibuat supaya informasi banjir tidak hanya datang dari satu sumber, tetapi juga bisa dibantu oleh laporan komunitas / pengguna sekitar, yang kemudian laporan tersebut diverifikasi oleh admin.
 
@@ -6,13 +6,13 @@ Secara singkat, website ini memungkinkan pengguna untuk: login, memilih lokasi, 
 
 ---
 
-## Project Demo
+## 🚀 Project Demo
 
 Link: https://ban-sos.vercel.app/
 
 ---
 
-## Overview
+## 📌 Overview
 
 - **Name**: BanSos
 - **Type**: Flood Risk Monitoring & Community Report System
@@ -25,9 +25,9 @@ Link: https://ban-sos.vercel.app/
   
 ---
 
-## Features
+## 🔥 Features
 
-### Untuk User
+### 👤 Untuk User
 
 - Login, register, verifikasi email, dan reset password menggunakan Supabase Auth.
 - Dashboard untuk melihat kondisi lokasi yang dipilih user.
@@ -41,7 +41,7 @@ Link: https://ban-sos.vercel.app/
 - Mengatur notification preferences untuk laporan yang disetujui, ditolak, dan laporan sekitar.
 - Mendukung tampilan light mode dan dark mode.
 
-### Untuk Admin
+### 🛡️ Untuk Admin
 
 - Login khusus admin.
 - Admin portal untuk melihat ringkasan data.
@@ -52,7 +52,7 @@ Link: https://ban-sos.vercel.app/
 
 ---
 
-## Problem Solved
+## 🎯 Problem Solved
 
 Jakarta merupakan salah satu wilayah yang sering menghadapi risiko banjir. Informasi banjir sering kali tersebar dari banyak sumber dan tidak selalu mudah diverifikasi. Dengan ini *BanSos* mencoba membantu masalah tersebut dengan menyediakan platform yang menggabungkan laporan komunitas, analisis risiko berdasarkan lokasi, dan proses verifikasi oleh admin.
 
@@ -140,9 +140,9 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
 
 ---
 
-## Tech Stack
+## ⚙ Technology Stack
 
-### Frontend
+### 🎨 Frontend
 
 - React — library utama untuk membangun tampilan website.
 - Vite — build tool dan development server.
@@ -155,7 +155,7 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
 - Radix UI — komponen UI tambahan.
 - Recharts — chart dan visualisasi data.
 
-### Backend
+### ⚡ Backend
 
 - FastAPI — framework utama untuk membuat backend API.
 - Python — bahasa utama yang digunakan di backend khususnya di FastAPI.
@@ -166,7 +166,7 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
 - Requests — mengambil data dari API eksternal.
 - Supabase Python Client — menghubungkan backend dengan Supabase.
 
-### Database & Services
+### 🗄️ Database & Services
 
 - Supabase Authentication — login, register, verifikasi email, dan reset password.
 - Supabase Database — menyimpan data aplikasi seperti reports, saved locations, dan broadcast alerts.
@@ -174,7 +174,7 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
 - Supabase Row Level Security — mengatur akses data agar lebih aman.
 - Open-Meteo API — mengambil data prakiraan hujan/cuaca.
 
-### Deployment
+### 🌐 Deployment
 
 - Frontend: Vercel
 - Backend: Hugging Face Spaces menggunakan Docker
@@ -182,7 +182,7 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
   
 ---
 
-## Software Engineering Process
+## 🧩 Software Engineering Process
 
 Project BanSos dikembangkan menggunakan pendekatan Agile/Scrum sederhana. Selama proses pengerjaan, fitur dibagi ke dalam beberapa backlog dan dikerjakan secara bertahap melalui sprint. Pendekatan ini digunakan supaya pembagian tugas lebih jelas, progress lebih mudah dipantau, dan setiap fitur bisa diuji sebelum digabungkan ke versi utama project.
 
@@ -190,7 +190,7 @@ Dalam project ini, tim membagi pekerjaan ke beberapa area utama, yaitu frontend,
 
 ---
 
-### Product Backlog
+### 📋 Product Backlog
 
 Product backlog berisi daftar fitur utama yang direncanakan dalam project BanSos. Backlog ini menjadi target tim untuk menentukan prioritas pengembangan.
 
@@ -212,7 +212,7 @@ Product backlog berisi daftar fitur utama yang direncanakan dalam project BanSos
 
 ---
 
-### Sprint Backlog
+### 🏃 Sprint Backlog
 
 Sprint backlog digunakan untuk membagi pekerjaan menjadi task yang lebih kecil. Setiap sprint berfokus pada fitur tertentu agar proses development lebih terarah.
 
@@ -270,7 +270,7 @@ Sprint backlog digunakan untuk membagi pekerjaan menjadi task yang lebih kecil. 
 
 ---
 
-### Development Workflow
+### 🔄 Development Workflow
 
 Selama pengerjaan project, tim menggunakan GitHub untuk menyimpan source code dan mengatur perubahan yang dibuat oleh setiap anggota. Setiap perubahan fitur atau perbaikan dilakukan melalui branch agar tidak langsung mengganggu branch utama.
 
@@ -295,7 +295,7 @@ commit2-update
 
 ---
 
-### Testing Process
+### ✅ Testing Process
 
 Testing dilakukan secara manual dengan mencoba alur utama dari sisi user dan admin. Pengujian ini dilakukan untuk memastikan fitur yang dibuat sudah sesuai dengan kebutuhan dan tidak menyebabkan error pada flow utama aplikasi.
 
@@ -318,7 +318,7 @@ Testing dilakukan secara manual dengan mencoba alur utama dari sisi user dan adm
 
 ---
 
-### Deployment Flow
+### 🚢 Deployment Flow
 
 Project ini menggunakan deployment terpisah antara frontend, backend, dan database.
 
@@ -336,7 +336,7 @@ Alur deployment:
 
 ---
 
-## Struktur Folder
+## 📁 Folder Structure
 
 Struktur utama project ini seperti berikut:
 
@@ -394,7 +394,7 @@ Penjelasan singkat:
 
 ---
 
-## Cara Install dan Run Project
+## 🛠️ Cara Install dan Run Project
 
 ### 1. Clone Repository
 
@@ -513,7 +513,7 @@ Jika berhasil, akan muncul response seperti:
 
 ---
 
-## Environment Variables
+## 🔐 Environment Variables
 
 ### Frontend `.env`
 
@@ -579,11 +579,11 @@ CORS_ORIGINS=http://localhost:5173,https://nama-project.vercel.app
 
 ---
 
-## Informasi Supabase
+## 🗄️Information Supabase
 
 Project ini memakai Supabase untuk auth, database, dan storage.
 
-### 1. Authentication
+### 🔑 1. Authentication
 
 Supabase Auth dipakai untuk:
 
@@ -593,7 +593,7 @@ Supabase Auth dipakai untuk:
 - Reset password
 - Session user
 
-### 2. Database
+### 🧾 2. Database
 
 File database ada di:
 
@@ -614,7 +614,7 @@ Tabel utama yang dipakai:
 
 Backend juga memiliki fitur voting/konfirmasi laporan. Jika fitur confirm/deny dipakai, pastikan tabel `report_votes` juga tersedia di Supabase karena backend membaca dan menyimpan vote laporan melalui tabel tersebut.
 
-### 3. Storage
+### 🗂️ 3. Storage
 
 Project ini memakai Supabase Storage untuk menyimpan media laporan.
 
@@ -630,13 +630,13 @@ Upload media dilakukan lewat backend menggunakan service role key, jadi service 
 
 ---
 
-## Status Project
+## 📍 Project Status
 
 Project ini dibuat untuk kebutuhan Software Engineering dengan fokus pada sistem informasi risiko banjir, laporan komunitas, dan admin verification. Sistem ini masih bisa dikembangkan lagi, terutama untuk real-time notification, role management yang lebih rapi, dan integrasi data banjir yang lebih lengkap.
 
 ---
 
-## Contributors
+## 👥 Contributors
 
 1. Randy Salim
 2. Dzaky Rizha Anargya
