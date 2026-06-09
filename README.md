@@ -336,7 +336,7 @@ Alur deployment:
 
 ---
 
-## 📁 Folder Structure
+## 📁 Struktur Folder
 
 Struktur utama project ini seperti berikut:
 
@@ -358,6 +358,20 @@ BanSos/
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   └── README.md
+│
+├── docs/
+│   └── images/
+│       ├── adminDashboard.png
+│       ├── adminLogin.png
+│       ├── createReport.png
+│       ├── dashboardPage.png
+│       ├── incidentReports.png
+│       ├── loginPage.png
+│       ├── mapPage.png
+│       ├── myReports.png
+│       ├── registerPage.png
+│       ├── riskAnalysis.png
+│       └── settingPage.png
 │
 ├── frontend/
 │   ├── src/
@@ -384,12 +398,12 @@ BanSos/
 ├── .gitignore
 └── README.md
 ```
-
 Penjelasan singkat:
 
 - `frontend/` berisi semua code tampilan website.
 - `backend/` berisi API FastAPI untuk risk analysis, reports, saved locations, notifications, dan admin features.
 - `backend/datasource/` berisi data banjir yang dipakai untuk proses analisis risiko.
+- `docs/images/` berisi screenshot atau mockup tampilan aplikasi yang digunakan di README.
 - `supabase/schema.sql` berisi query SQL untuk membuat tabel dan konfigurasi database Supabase.
 
 ---
