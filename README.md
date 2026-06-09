@@ -138,6 +138,12 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
   <img src="./docs/images/adminDashboard.png" width="700">
 </p>
 
+- Admin BroadCastAlert Page
+
+- <p align="center">
+  <img src="./docs/images/adminBroadcastAlert.png" width="700">
+</p>
+
 ---
 
 ## ⚙ Technology Stack
