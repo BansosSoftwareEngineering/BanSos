@@ -60,8 +60,83 @@ Dengan sistem ini, pengguna bisa melihat laporan banjir di sekitar lokasi mereka
 
 ---
 
-## Mockups
+## 💻 Mockups
 
+### 🔐 Authentication Pages
+
+- Login Page
+
+<p align="center">
+  <img src="./docs/images/loginPage.png" width="700">
+</p>
+
+- Register Page
+
+<p align="center">
+  <img src="./docs/images/registerPage.png" width="700">
+</p>
+
+- Admin Login Page
+
+<p align="center">
+  <img src="./docs/images/adminLogin.png" width="700">
+</p>
+
+---
+
+### 🏠 User Side Interface
+
+- Dashboard Page
+
+<p align="center">
+  <img src="./docs/images/dashboardPage.png" width="700">
+</p>
+
+- Map Page
+
+<p align="center">
+  <img src="./docs/images/mapPage.png" width="700">
+</p>
+
+- Incident Reports Page
+
+<p align="center">
+  <img src="./docs/images/incidentReports.png" width="700">
+</p>
+
+- Create Report Page
+
+<p align="center">
+  <img src="./docs/images/createReport.png" width="700">
+</p>
+
+- My Reports Page
+
+<p align="center">
+  <img src="./docs/images/myReports.png" width="700">
+</p>
+
+- Risk Analysis Page
+
+<p align="center">
+  <img src="./docs/images/riskAnalysis.png" width="700">
+</p>
+
+- Settings Page
+
+<p align="center">
+  <img src="./docs/images/settingPage.png" width="700">
+</p>
+
+---
+
+### 🛠 Admin Side Interface
+
+- Admin Dashboard Page
+
+<p align="center">
+  <img src="./docs/images/adminDashboard.png" width="700">
+</p>
 
 ---
 
