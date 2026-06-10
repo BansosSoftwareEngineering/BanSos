@@ -640,7 +640,7 @@ export function IncidentReportsPage() {
             >
               <Plus size={13} />
 
-              <span className="hidden sm:inline">Lapor</span>
+              <span className="hidden sm:inline">Report</span>
             </button>
           </div>
         </div>
