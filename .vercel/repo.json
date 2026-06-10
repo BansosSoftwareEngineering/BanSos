@@ -1,0 +1,11 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_6SvTpo1sISDIrLrtDMeAku6lL9XD",
+      "name": "ban-sos",
+      "directory": "frontend",
+      "orgId": "team_sFXHNpVClRHZoFjNScDWU1L3"
+    }
+  ]
+}
