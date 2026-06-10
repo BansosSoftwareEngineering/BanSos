@@ -35,7 +35,7 @@ async function cachedFetch<T>(
 }
 
 const toKey = (prefix: string, lat: number, lng: number) =>
-  `${prefix}:${lat.toFixed(4)}:${lng.toFixed(4)}`;
+  `${prefix}:${lat.toFixed(3)}:${lng.toFixed(3)}`;
 
 const TTL_FLOOD_RISK = 10 * 60 * 1000;
 const TTL_FORECAST = 30 * 60 * 1000;

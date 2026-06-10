@@ -181,3 +181,9 @@ bower_components/
 
 .dynamodb/
 .firebase/
+
+.vercel/*
+!.vercel/repo.json
+!.vercel/README.txt
+.vercel/.env*
+.vercel/*.env
