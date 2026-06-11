@@ -10,6 +10,8 @@ Secara singkat, website ini memungkinkan pengguna untuk: login, memilih lokasi, 
 
 Link: https://ban-sos.vercel.app/
 
+---
+
 ## 🏗️ System Architecture
 
 Diagram berikut menunjukkan gambaran umum arsitektur sistem BanSos, mulai dari user dan admin yang mengakses frontend, frontend yang terhubung ke backend FastAPI, hingga backend yang menggunakan Supabase dan external data source.
@@ -41,8 +43,7 @@ flowchart LR
 
 Secara umum, frontend BanSos dibangun menggunakan React + Vite dan dideploy melalui Vercel. Backend menggunakan FastAPI dan dijalankan melalui Hugging Face Spaces. Supabase digunakan untuk authentication, database, dan storage, sedangkan external data seperti cuaca, tinggi air, dan data geospasial digunakan untuk mendukung proses analisis risiko banjir.
 
-Secara umum, frontend BanSos dibangun menggunakan React + Vite dan dideploy melalui Vercel. Backend menggunakan FastAPI dan dijalankan melalui Hugging Face Spaces. Supabase digunakan untuk authentication, database, dan storage, sedangkan data eksternal seperti cuaca, tinggi air, dan data geospasial digunakan untuk mendukung proses analisis risiko banjir.
-
+---
 
 ## Fitur Utama
 
