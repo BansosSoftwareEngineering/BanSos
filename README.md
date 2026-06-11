@@ -435,6 +435,7 @@ BanSos/
 │   └── images/
 │
 ├── frontend/
+|   ├── public/
 │   ├── src/
 │   ├── index.html
 │   ├── package.json
