@@ -324,6 +324,64 @@ Testing dilakukan secara manual dengan mencoba alur utama dari sisi user dan adm
 
 ---
 
+### 🔁 CI/CD Testing
+
+Project BanSos menggunakan GitHub Actions untuk menjalankan CI/CD testing secara otomatis. Pipeline ini membantu memastikan perubahan code dicek terlebih dahulu sebelum masuk ke main branch.
+
+CI/CD testing berjalan ketika ada push ke branch development atau pull request ke branch `main`.
+
+#### CI Process
+
+Pada bagian frontend, pipeline melakukan:
+
+- Install dependencies menggunakan `npm ci`.
+- Build check untuk memastikan React + Vite dapat dibuild tanpa error.
+- Menggunakan environment variables dari GitHub Secrets agar build production tetap sesuai konfigurasi asli.
+
+Pada bagian backend, pipeline melakukan:
+
+- Install dependencies dari `requirements.txt`.
+- Menjalankan flake8 untuk mengecek error kritis seperti syntax error dan undefined variable.
+
+#### CD Process
+
+Setelah perubahan berhasil di-merge ke branch `main`, deployment berjalan otomatis:
+
+- Frontend dideploy ke Vercel.
+- Backend dideploy ke Hugging Face Spaces.
+
+#### CI/CD Flow
+
+```txt
+Developer Push / Pull Request
+            ↓
+      GitHub Actions
+            ↓
+ ┌─────────────────────────┐
+ │ Frontend Build Check    │
+ │ - npm ci                │
+ │ - npm run build         │
+ └─────────────────────────┘
+            ↓
+ ┌─────────────────────────┐
+ │ Backend Lint Check      │
+ │ - pip install           │
+ │ - flake8 critical check │
+ └─────────────────────────┘
+            ↓
+   Pull Request Review
+            ↓
+      Merge to main
+            ↓
+ ┌─────────────────────────┐
+ │ Deployment              │
+ │ - Frontend: Vercel      │
+ │ - Backend: HF Spaces    │
+ └─────────────────────────┘
+            ↓
+    Production Website
+```
+---
 ### 🚢 Deployment Flow
 
 Project ini menggunakan deployment terpisah antara frontend, backend, dan database.
@@ -344,71 +402,49 @@ Alur deployment:
 
 ## 📁 Folder Structure
 
-Struktur utama project ini seperti berikut:
+Secara singkat structure folder kami sebagai berikut:
 
 ```txt
 BanSos/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml
+│       └── deploy.yml
+│
+├── .vercel/
+│   └── repo.json
+│
 ├── backend/
 │   ├── datasource/
-│   │   ├── clean/
-│   │   ├── processed/
-│   │   └── raw/
 │   ├── src/
-│   │   ├── api/
-│   │   │   └── main.py
-│   │   ├── database/
-│   │   │   └── supabase_client.py
-│   │   ├── data_cleaning/
-│   │   ├── feature_engineering/
-│   │   └── risk_engine/
 │   ├── Dockerfile
-│   ├── requirements.txt
-│   └── README.md
+│   ├── README.md
+│   └── requirements.txt
 │
 ├── docs/
 │   └── images/
-│       ├── adminDashboard.png
-│       ├── adminLogin.png
-│       ├── createReport.png
-│       ├── dashboardPage.png
-│       ├── incidentReports.png
-│       ├── loginPage.png
-│       ├── mapPage.png
-│       ├── myReports.png
-│       ├── registerPage.png
-│       ├── riskAnalysis.png
-│       └── settingPage.png
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── app/
-│   │   │   ├── components/
-│   │   │   ├── context/
-│   │   │   ├── data/
-│   │   │   ├── pages/
-│   │   │   ├── routes/
-│   │   │   ├── services/
-│   │   │   └── utils/
-│   │   ├── styles/
-│   │   └── main.tsx
 │   ├── index.html
 │   ├── package.json
-│   ├── tsconfig.json
 │   ├── vercel.json
 │   └── vite.config.ts
 │
 ├── supabase/
 │   └── schema.sql
 │
-├── ATTRIBUTIONS.md
 ├── .gitignore
+├── ATTRIBUTIONS.md
 └── README.md
 ```
 Penjelasan singkat:
 
-- `frontend/` berisi semua code tampilan website.
-- `backend/` berisi API FastAPI untuk risk analysis, reports, saved locations, notifications, dan admin features.
-- `backend/datasource/` berisi data banjir yang dipakai untuk proses analisis risiko.
+- `.github/workflows/` berisi konfigurasi GitHub Actions untuk CI/CD pipeline.
+- `.vercel/repo.json` berisi konfigurasi project Vercel untuk deployment frontend.
+- `frontend/` berisi code untuk tampilan website dengan React + Vite.
+- `backend/` berisi API FastAPI untuk risk analysis, reports, saved locations, notifications, broadcast alerts, dan admin features.
+- `backend/README.md` berisi konfigurasi Hugging Face Spaces agar backend dapat berjalan sebagai Docker Space.
 - `docs/images/` berisi screenshot atau mockup tampilan aplikasi yang digunakan di README.
 - `supabase/schema.sql` berisi query SQL untuk membuat tabel dan konfigurasi database Supabase.
 
