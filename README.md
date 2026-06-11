@@ -1,3 +1,13 @@
+<p align="center">
+  <img alt="BanSos Logo" title="BanSos" src="./docs/images/BANSOS_icon.png" width="180">
+</p>
+
+<p align="center">
+  Flood Risk & Community Report System for Jakarta
+</p>
+
+---
+
 # 🌊 BanSos - Flood Risk & Community Report System
 
 BanSos adalah website untuk membantu pengguna memantau risiko banjir di sekitar Jakarta. Melalui website ini, pengguna bisa membuat laporan kejadian banjir dan melihat informasi laporan dari warga lain berdasarkan lokasi pengguna tersebut. Project ini dibuat supaya informasi banjir tidak hanya datang dari satu sumber, tetapi juga bisa dibantu oleh laporan komunitas / pengguna sekitar, yang kemudian laporan tersebut diverifikasi oleh admin.
