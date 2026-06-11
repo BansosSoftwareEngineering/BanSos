@@ -286,6 +286,20 @@ Sprint backlog digunakan untuk membagi pekerjaan menjadi task yang lebih kecil. 
 
 ---
 
+### 🗓️ Sprint Timeline
+
+Sprint timeline menggambarkan urutan dan waktu pengerjaan setiap sprint selama project BanSos berjalan. Bagian ini membantu memperlihatkan progress pengembangan dari awal setup hingga deployment, sehingga alur kerja tim lebih mudah dipantau dan dipahami.
+
+| Sprint | Description                          |    Done    |
+| ------ | ------------------------------------ | ---------- |
+|   1    | Project Setup & Basic Structure      | 09-5-2026  |
+|   2    | Authentication & User Flow           | 20-5-2026  |
+|   3    | Report, Map & Risk Analysis          | 25-5-2026  |
+|   4    | Admin Features                       | 31-5-2026  |
+|   5    | Finalization & Deployment            | 05-6-2026  |
+
+---
+
 ### 🔄 Development Workflow
 
 Selama pengerjaan project Bansos, kami menggunakan GitHub untuk menyimpan source code dan mengatur perubahan yang dibuat oleh setiap anggota. Setiap perubahan fitur atau perbaikan dilakukan melalui branch agar tidak langsung mengganggu branch utama.
