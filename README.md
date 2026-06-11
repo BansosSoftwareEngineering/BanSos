@@ -10,18 +10,62 @@ Secara singkat, website ini memungkinkan pengguna untuk: login, memilih lokasi, 
 
 Link: https://ban-sos.vercel.app/
 
----
 ## 🏗️ System Architecture
 
 Diagram berikut menunjukkan gambaran umum arsitektur sistem BanSos, mulai dari user dan admin yang mengakses frontend, frontend yang terhubung ke backend FastAPI, sampai backend yang menggunakan Supabase, external API, dan deployment services.
 
-<p align="center">
-  <img src="./docs/images/systemDiagram.png" width="900">
-</p>
+```mermaid
+%%{init: {'theme': 'neutral', 'flowchart': {'padding': 16, 'htmlLabels': true}}}%%
 
-Secara umum, frontend BanSos dibangun menggunakan React + Vite dan dideploy melalui Vercel. Backend menggunakan FastAPI dan dijalankan melalui Hugging Face Spaces. Supabase digunakan untuk authentication, database, dan storage, sedangkan data cuaca atau prakiraan hujan diambil dari external API seperti Open-Meteo.
+flowchart TB
 
----
+    subgraph Users["Target Users"]
+        U["Warga Jakarta"]
+        A["Admin / Operator"]
+    end
+
+    subgraph Client["Presentation Layer · Vercel"]
+        FE["React SPA<br/>Map · Dashboard · Reports · Risk UI"]
+    end
+
+    subgraph API["Application Layer · Hugging Face Spaces"]
+        BE["FastAPI REST API"]
+        RE["Risk Fusion Engine<br/>Weather 35% · Water 30%<br/>Polygon 20% · History 15%"]
+        BE --> RE
+    end
+
+    subgraph Data["Data Layer · Supabase"]
+        AUTH["Auth"]
+        DB["PostgreSQL<br/>reports · votes · alerts · locations"]
+        STOR["Storage report-media"]
+    end
+
+    subgraph External["External Data & Services"]
+        BMKG["BMKG API"]
+        DKI["DKI Water XML"]
+        GEO["JakartaSatu GeoJSON"]
+        CSV["BNPB / City CSV"]
+        METEO["Open-Meteo"]
+    end
+
+    U -->|browse · report · vote| FE
+    A -->|verify · broadcast| FE
+    FE -->|session| AUTH
+    FE -->|REST| BE
+    FE -->|charts| METEO
+    BE --> DB
+    BE --> STOR
+    RE --> BMKG
+    RE --> DKI
+    RE --> GEO
+    RE --> CSV
+
+    classDef default fill:#f5f5f5,stroke:#333,color:#111
+
+```
+
+Secara umum, frontend BanSos dibangun menggunakan React + Vite dan dideploy melalui Vercel. Backend menggunakan FastAPI dan dijalankan melalui Hugging Face Spaces. Supabase digunakan untuk authentication, database, dan storage, sedangkan data eksternal seperti cuaca, tinggi air, dan data geospasial digunakan untuk mendukung proses analisis risiko banjir.
+
 
 ## Fitur Utama
 
