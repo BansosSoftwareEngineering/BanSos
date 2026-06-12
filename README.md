@@ -12,6 +12,39 @@ Link: https://ban-sos.vercel.app/
 
 ---
 
+## 🏗️ System Architecture
+
+Diagram berikut menunjukkan gambaran umum arsitektur sistem BanSos, mulai dari user dan admin yang mengakses frontend, frontend yang terhubung ke backend FastAPI, hingga backend yang menggunakan Supabase dan external data source.
+
+```mermaid
+flowchart LR
+    USER[👤 User / Warga Jakarta]
+    ADMIN[🛡️ Admin / Operator]
+
+    FE[🌐 Frontend<br/>React + Vite<br/>Deployed on Vercel]
+
+    BE[⚙️ Backend API<br/>FastAPI<br/>Deployed on Hugging Face Spaces]
+
+    SB[🗄️ Supabase<br/>Auth · Database · Storage]
+
+    EXT[🌦️ External Data<br/>Open-Meteo · BMKG · DKI Water Data<br/>Jakarta Geospatial Data]
+
+    USER -->|Login, view map, create report| FE
+    ADMIN -->|Verify reports, send broadcast| FE
+
+    FE -->|REST API request| BE
+    FE -->|Auth session| SB
+
+    BE -->|Read / write data| SB
+    BE -->|Fetch weather & flood data| EXT
+
+    BE -->|Risk result, reports, alerts| FE
+```
+
+Secara umum, frontend BanSos dibangun menggunakan React + Vite dan dideploy melalui Vercel. Backend menggunakan FastAPI dan dijalankan melalui Hugging Face Spaces. Supabase digunakan untuk authentication, database, dan storage, sedangkan external data seperti cuaca, tinggi air, dan data geospasial digunakan untuk mendukung proses analisis risiko banjir.
+
+---
+
 ## Fitur Utama
 
 ### Untuk User
