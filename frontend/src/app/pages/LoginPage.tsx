@@ -201,7 +201,7 @@ export function LoginPage() {
                 <div className="mb-2 flex items-center gap-2">
                   <LogoMark size={26} />
 
-                  <span className="text-[30px] font-black uppercase tracking-[1.4px] text-slate-200">
+                  <span className="text-[30px] font-black uppercase tracking-[1.4px] text-slate-900">
                     BANSOS
                   </span>
                 </div>
@@ -216,7 +216,7 @@ export function LoginPage() {
                   Selamat datang
                 </p>
 
-                <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-200">
+                <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
                   Masuk ke akun Anda
                 </h2>
 
@@ -227,7 +227,7 @@ export function LoginPage() {
 
               <form onSubmit={handleSignIn} className="space-y-4 sm:space-y-5" noValidate>
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-semibold text-slate-200 sm:text-base">
+                  <label className="block text-sm font-semibold text-slate-700 sm:text-base">
                     Email
                   </label>
 
@@ -255,7 +255,7 @@ export function LoginPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-semibold text-slate-200 sm:text-base">
+                  <label className="block text-sm font-semibold text-slate-700 sm:text-base">
                     Password
                   </label>
 
@@ -307,7 +307,7 @@ export function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full rounded-xl bg-blue-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 sm:py-4"
+                  className="w-full rounded-xl bg-blue-600 py-3.5 text-sm font-bold uppercase tracking-wide text-[#ffffff] shadow-lg shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 sm:py-4"
                 >
                   {isLoading ? 'Memproses...' : 'Masuk'}
                 </button>
@@ -376,7 +376,7 @@ export function LoginPage() {
 
                 <button
                   onClick={closeForgotPassword}
-                  className="mt-2 w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+                  className="mt-2 w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-[#ffffff] transition-colors hover:bg-blue-700"
                 >
                   Kembali ke halaman masuk
                 </button>
@@ -388,18 +388,18 @@ export function LoginPage() {
                     <Mail size={21} className="text-blue-600" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-slate-200">
+                  <h3 className="text-2xl font-bold text-slate-900">
                     Lupa password?
                   </h3>
 
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-500">
                     Masukkan email akun Anda. Kami akan mengirimkan tautan untuk
                     mengatur ulang password.
                   </p>
                 </div>
 
                 <div className="mb-6 space-y-1.5">
-                  <label className="block text-sm font-semibold text-slate-200">
+                  <label className="block text-sm font-semibold text-slate-700">
                     Email
                   </label>
 
@@ -429,14 +429,14 @@ export function LoginPage() {
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <button
                     onClick={closeForgotPassword}
-                    className="rounded-xl border border-slate-100/60 bg-white/60 py-3 text-sm font-semibold text-slate-200 transition-colors hover:bg-white"
+                    className="rounded-xl border border-slate-100/60 bg-white/60 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-white"
                   >
                     Batal
                   </button>
 
                   <button
                     onClick={handleForgotPasswordSubmit}
-                    className="rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+                    className="rounded-xl bg-blue-600 py-3 text-sm font-semibold text-[#ffffff] transition-colors hover:bg-blue-700"
                   >
                     Kirim tautan reset
                   </button>

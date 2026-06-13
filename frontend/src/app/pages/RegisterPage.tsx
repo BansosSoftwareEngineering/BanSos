@@ -189,12 +189,12 @@ export function RegisterPage() {
               <div className="mb-2 flex items-center gap-2">
                 <LogoMark size={26} />
 
-                <span className="text-[24px] font-black uppercase tracking-[1.4px] text-slate-200">
+                <span className="text-[24px] font-black uppercase tracking-[1.4px] text-slate-950">
                   BANSOS
                 </span>
               </div>
 
-              <h1 className="mt-4 text-2xl font-black uppercase leading-tight tracking-tight text-slate-300 sm:text-3xl">
+              <h1 className="mt-4 text-2xl font-black uppercase leading-tight tracking-tight text-slate-900 sm:text-3xl">
                 Buat Akun
               </h1>
 
@@ -209,7 +209,7 @@ export function RegisterPage() {
                 Daftar akun
               </p>
 
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-200">
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
                 Buat akun baru
               </h2>
 
@@ -224,7 +224,7 @@ export function RegisterPage() {
               noValidate
             >
               <div className="space-y-1.5">
-                <label className="block text-sm font-semibold text-slate-300 sm:text-base">
+                <label className="block text-sm font-semibold text-slate-700 sm:text-base">
                   Nama lengkap
                 </label>
 
@@ -252,7 +252,7 @@ export function RegisterPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="block text-sm font-semibold text-slate-300 sm:text-base">
+                <label className="block text-sm font-semibold text-slate-700 sm:text-base">
                   Email
                 </label>
 
@@ -280,7 +280,7 @@ export function RegisterPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="block text-sm font-semibold text-slate-300 sm:text-base">
+                <label className="block text-sm font-semibold text-slate-700 sm:text-base">
                   Password
                 </label>
 
@@ -329,7 +329,7 @@ export function RegisterPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="block text-sm font-semibold text-slate-300 sm:text-base">
+                <label className="block text-sm font-semibold text-slate-700 sm:text-base">
                   Konfirmasi password
                 </label>
 
@@ -382,7 +382,7 @@ export function RegisterPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="mt-4 w-full rounded-xl bg-blue-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                className="mt-4 w-full rounded-xl bg-blue-600 py-3.5 text-sm font-bold uppercase tracking-wide text-[#ffffff] shadow-lg shadow-blue-600/25 transition-all hover:-translate-y-0.5 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
               >
                 {isLoading ? 'Membuat akun...' : 'Buat akun'}
               </button>
