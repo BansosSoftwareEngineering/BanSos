@@ -43,59 +43,55 @@ export function AuthCallbackPage() {
   }, [navigate]);
 
   return (
-    <div
-      className="relative min-h-screen flex items-center justify-center px-6"
-      style={{ background: 'linear-gradient(135deg, rgb(17,24,39) 0%, rgb(30,41,59) 100%)' }}
-    >
-      <div
-        className="w-full max-w-[400px] rounded-[32px] p-8 text-center"
-        style={{
-          background: 'rgba(255,255,255,0.12)',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255,255,255,0.2)',
-          boxShadow: '0px 25px 50px -12px rgba(0,0,0,0.4)',
-        }}
-      >
+    <div className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-[#f6f9ff]">
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.28),transparent_34%),radial-gradient(circle_at_top_right,rgba(191,219,254,0.55),transparent_32%),linear-gradient(135deg,#f8fbff_0%,#eef5ff_45%,#ffffff_100%)]" />
+        <div className="absolute -left-28 top-16 h-72 w-72 rounded-full bg-blue-300/40 blur-3xl" />
+        <div className="absolute right-[-140px] top-24 h-80 w-80 rounded-full bg-sky-200/60 blur-3xl" />
+        <div className="absolute bottom-[-160px] left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-white blur-3xl" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[400px] rounded-[32px] p-8 text-center border border-white/70 bg-white/65 shadow-[0_24px_80px_rgba(37,99,235,0.16)] backdrop-blur-2xl">
         {status === 'loading' && (
           <>
             <div className="flex justify-center mb-5">
-              <Loader2 className="text-blue-400 animate-spin" size={48} />
+              <Loader2 className="text-blue-500 animate-spin" size={48} />
             </div>
-            <h1 className="text-white text-xl font-bold mb-2">Memverifikasi akun...</h1>
-            <p className="text-gray-400 text-sm">Mohon tunggu sebentar.</p>
+            <h1 className="text-slate-900 text-xl font-bold mb-2">Memverifikasi akun...</h1>
+            <p className="text-slate-500 text-sm">Mohon tunggu sebentar.</p>
           </>
         )}
 
         {status === 'success' && (
           <>
             <div className="flex justify-center mb-5">
-              <div className="w-16 h-16 rounded-full bg-green-500/20 border border-green-400/30 flex items-center justify-center">
-                <CheckCircle2 className="text-green-400" size={36} />
+              <div className="w-16 h-16 rounded-full bg-green-100 border border-green-300/50 flex items-center justify-center">
+                <CheckCircle2 className="text-green-500" size={36} />
               </div>
             </div>
-            <h1 className="text-white text-xl font-bold mb-2">Email Terverifikasi!</h1>
-            <p className="text-gray-300 text-sm">Akun Anda berhasil diverifikasi. Mengalihkan ke dashboard...</p>
+            <h1 className="text-slate-900 text-xl font-bold mb-2">Email Terverifikasi!</h1>
+            <p className="text-slate-500 text-sm">Akun Anda berhasil diverifikasi. Mengalihkan ke dashboard...</p>
           </>
         )}
 
         {status === 'error' && (
           <>
             <div className="flex justify-center mb-5">
-              <div className="w-16 h-16 rounded-full bg-red-500/20 border border-red-400/30 flex items-center justify-center">
-                <AlertCircle className="text-red-400" size={36} />
+              <div className="w-16 h-16 rounded-full bg-red-100 border border-red-300/50 flex items-center justify-center">
+                <AlertCircle className="text-red-500" size={36} />
               </div>
             </div>
-            <h1 className="text-white text-xl font-bold mb-2">Verifikasi Gagal</h1>
-            <p className="text-gray-300 text-sm mb-6 leading-relaxed">{errorMessage}</p>
+            <h1 className="text-slate-900 text-xl font-bold mb-2">Verifikasi Gagal</h1>
+            <p className="text-slate-500 text-sm mb-6 leading-relaxed">{errorMessage}</p>
             <button
               onClick={() => navigate('/register')}
-              className="w-full py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold transition-colors mb-3"
+              className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors mb-3"
             >
               Daftar ulang
             </button>
             <button
               onClick={() => navigate('/')}
-              className="w-full py-3 rounded-lg border border-white/20 hover:bg-white/10 text-gray-300 text-sm transition-colors"
+              className="w-full py-3 rounded-xl border border-blue-100 bg-white/70 hover:bg-white text-slate-700 text-sm font-semibold transition-colors"
             >
               Kembali ke login
             </button>

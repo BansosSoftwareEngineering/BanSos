@@ -5,7 +5,6 @@ import {
   Clock,
   Image,
   MapPin,
-  MessageSquare,
   RefreshCw,
   XCircle,
 } from 'lucide-react';
@@ -74,7 +73,6 @@ export function VerifyReports() {
   const [rejectTarget, setRejectTarget] = useState<string | null>(null);
   const [selectedReason, setSelectedReason] = useState('');
   const [customReason, setCustomReason] = useState('');
-  const [notes, setNotes] = useState<Record<string, string>>({});
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
   const viewReport = useMemo(
@@ -106,7 +104,7 @@ export function VerifyReports() {
   const approve = async (id: string) => {
     setActionLoading(id);
     try {
-      await updateReportStatus(id, 'approved', undefined, notes[id]);
+      await updateReportStatus(id, 'approved');
       setReports((prev) => prev.filter((report) => report.id !== id));
       setViewing(null);
     } catch (err) {
@@ -133,7 +131,7 @@ export function VerifyReports() {
 
     setActionLoading(rejectTarget);
     try {
-      await updateReportStatus(rejectTarget, 'rejected', reason, notes[rejectTarget]);
+      await updateReportStatus(rejectTarget, 'rejected', reason);
       setReports((prev) => prev.filter((report) => report.id !== rejectTarget));
       setRejectTarget(null);
       setViewing(null);
@@ -299,19 +297,6 @@ export function VerifyReports() {
               <p className="text-[#8c909f] text-xs mt-1 font-mono">
                 LAT {viewReport.latitude.toFixed(6)} | LNG {viewReport.longitude.toFixed(6)}
               </p>
-            </div>
-
-            <div>
-              <p className="text-[#8c909f] text-[10px] uppercase tracking-widest font-semibold mb-2 flex items-center gap-1.5">
-                <MessageSquare size={12} /> Catatan Admin
-              </p>
-              <textarea
-                value={notes[viewReport.id] || ''}
-                onChange={(e) => setNotes((prev) => ({ ...prev, [viewReport.id]: e.target.value }))}
-                rows={3}
-                placeholder="Tulis catatan untuk laporan ini..."
-                className="w-full bg-[#10131a] border border-[#424754] rounded-lg px-4 py-3 text-[#e1e2ec] placeholder-[#4a5060] text-sm focus:outline-none focus:border-[rgba(173,198,255,0.4)] resize-none"
-              />
             </div>
 
             <div className="flex items-center gap-3 pt-2">
